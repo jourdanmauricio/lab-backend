@@ -15,6 +15,8 @@ const config = {
   jwtSecret: process.env.JWT_SECRET,
   mailerEmail: process.env.MAILER_EMAIL,
   mailerPassword: process.env.MAILER_PASSWORD,
+  superAdminPass: process.env.SUPER_ADMIN_PASSWORD,
+  frontEnd: process.env.FRONT_END,
 };
 // console.log('Config', config);
 

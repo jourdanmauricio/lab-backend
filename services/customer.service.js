@@ -26,6 +26,17 @@ class CustomerService {
     return newCustomer;
   }
 
+  async update(id, changes) {
+    const customer = await this.findOne(id);
+    const user = await models.User.findByPk(changes.userId);
+    if (changes.userId !== customer.userId) {
+      throw boom.badRequest('Perfil incorrecto!');
+    }
+    const rta = await customer.update(changes);
+    await user.update({ updatedAt: Date.now() });
+    return rta;
+  }
+
   async delete(id) {
     const model = await this.findOne(id);
     await model.destroy();

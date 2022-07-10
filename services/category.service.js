@@ -1,4 +1,5 @@
 const { models } = require('./../libs/sequelize');
+const { Op } = require('sequelize');
 
 class CategoryService {
   constructor() {}
@@ -7,9 +8,48 @@ class CategoryService {
     return newCategory;
   }
 
-  async find() {
-    const categories = await models.Category.findAll();
-    return categories;
+  async find(query) {
+    const options = {
+      where: {},
+      order: [['updated_at', 'DESC']],
+    };
+    const { limit, offset, q } = query;
+    // const { limit, offset } = query;
+
+    if (q) {
+      options.where = {
+        [Op.or]: [
+          {
+            ml_id: {
+              [Op.like]: `%${q}%`,
+            },
+          },
+          {
+            full_name: {
+              [Op.like]: `%${q}%`,
+            },
+          },
+        ],
+      };
+    }
+
+    const count = await models.Category.count(options);
+
+    if (limit && offset) {
+      (options.limit = limit), (options.offset = offset);
+    }
+
+    const categories = await models.Category.findAll(options);
+    const rta = {
+      paging: {
+        total: count,
+        offset: offset,
+        limit: limit,
+      },
+      results: categories,
+    };
+
+    return rta;
   }
 
   async findOne(id) {
@@ -27,6 +67,8 @@ class CategoryService {
   }
 
   async delete(id) {
+    const category = await this.findOne(id);
+    await category.destroy();
     return { id };
   }
 }

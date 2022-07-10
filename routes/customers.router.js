@@ -38,10 +38,13 @@ router.patch(
   '/:id',
   validationHandler(getCustomerSchema, 'params'),
   validationHandler(updateCustomerSchema, 'body'),
+  passport.authenticate('jwt', { session: false }),
+  checkUser('body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
       const body = req.body;
+      body.updatedAt = Date.now();
       res.status(201).json(await service.update(id, body));
     } catch (error) {
       next(error);

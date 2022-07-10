@@ -25,7 +25,7 @@ router.post(
       const token = jwt.sign(payload, config.jwtSecret);
 
       // retornamos el user y el token
-      res.json({ user, token });
+      res.status(200).json({ user, token });
     } catch (error) {
       next(error);
     }
@@ -36,7 +36,7 @@ router.post('/recovery', async (req, res, next) => {
   try {
     const { email } = req.body;
     const rta = await service.sendRecovery(email);
-    res.json(rta);
+    res.status(200).json(rta);
   } catch (error) {
     next(error);
   }
@@ -46,7 +46,7 @@ router.post('/change-password', async (req, res, next) => {
   try {
     const { token, newPassword } = req.body;
     const rta = await service.changePassword(token, newPassword);
-    res.json(rta);
+    res.status(200).json(rta);
   } catch (error) {
     next(error);
   }

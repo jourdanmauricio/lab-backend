@@ -40,12 +40,7 @@ function checkUser(property) {
       id = parseInt(req.params.id);
     }
 
-    // console.log('id', id);
-    // console.log('role', user.role);
-    // console.log('token id', user.sub);
-    // console.log('checkUser !!!', id === user.sub);
-
-    if (user.role === 'admin' || id === user.sub) {
+    if (user.role.includes('admin', 'superadmin') || id === user.sub) {
       next();
     } else {
       next(boom.unauthorized());
@@ -53,5 +48,9 @@ function checkUser(property) {
   };
 }
 
-module.exports = { checkApiKey, checkAdminRole, checkRoles, checkUser };
-// module.exports = { checkApiKey, checkAdminRole, checkRoles };
+module.exports = {
+  checkApiKey,
+  checkAdminRole,
+  checkRoles,
+  checkUser,
+};

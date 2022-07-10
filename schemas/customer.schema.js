@@ -9,6 +9,7 @@ const phone = Joi.string()
 const userId = Joi.number().integer();
 const documentType = Joi.string().min(1);
 const documentNumber = Joi.string().min(1);
+const updatedAt = Joi.date();
 
 const getCustomerSchema = Joi.object({ id: id.required() });
 
@@ -28,6 +29,7 @@ const updateCustomerSchema = Joi.object({
   userId,
   documentType,
   documentNumber,
+  updatedAt,
 });
 
 module.exports = {

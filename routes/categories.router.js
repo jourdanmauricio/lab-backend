@@ -9,19 +9,24 @@ const {
   createCategorySchema,
   updateCategorySchema,
   getCategorySchema,
+  queryUserSchema,
 } = require('./../schemas/category.schema');
 
 const router = express.Router();
 const service = new CategoryService();
 
-router.get('/', async (req, res, next) => {
-  try {
-    const categories = await service.find();
-    res.json(categories);
-  } catch (error) {
-    next(error);
+router.get(
+  '/',
+  validatorHandler(queryUserSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      const categories = await service.find(req.query);
+      res.json(categories);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 router.get(
   '/:id',
@@ -41,7 +46,7 @@ router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   // checkAdminRole,
-  checkRoles('admin', 'seller'),
+  checkRoles('admin', 'superadmin'),
   validatorHandler(createCategorySchema, 'body'),
   async (req, res, next) => {
     try {
@@ -72,7 +77,9 @@ router.patch(
 
 router.delete(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getCategorySchema, 'params'),
+  checkRoles('superadmin', 'admin'),
   async (req, res, next) => {
     try {
       const { id } = req.params;

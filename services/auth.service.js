@@ -46,13 +46,35 @@ class AuthService {
     const token = jwt.sign(payload, config.jwtSecret, {
       expiresIn: '15min',
     });
-    const link = `https://myfrontend.com/recovery?token=${token}`;
+    const link = `${config.frontEnd}/recovery-password?token=${token}`;
     await service.update(user.id, { recoveryToken: token });
     const mail = {
       from: `"Foo Boo 👻" <${config.mailerEmail}>`,
       to: `${user.email}`,
       subject: 'Email para recuperar contraseña 👌',
-      html: `<b>Ingresa a este link para recuperar tu contraseña: ${link}</b>`,
+      html: `
+      <p>Has solicitado recuperar el password. Si no fuiste tú ignora este email.</p>
+      <table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>
+            <table cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="border-radius: 2px;" bgcolor="#ED2939">
+                  <a href=${link} target="_blank" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
+                    Recuperar contraseña             
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <p>Si el botón no fuciona puedes copiar y pegar el siguiente ingresa a este link 
+      en tu navegador para recuperar tu contraseña:</p> 
+      <br> ${link} <br><br>
+      <p>Muchas gracias,</p>
+      <p>TiDev</p>
+      `,
     };
 
     const rta = await this.sendMail(mail);
