@@ -14,18 +14,19 @@ const {
 
 app.use(express.json());
 
-const whiteList = ['http://localhost:8080', 'https://my-app.com'];
-const options = {
-  origen: (origen, callback) => {
-    if (whiteList.includes(origen) || !origen) {
-      callback(null, true);
-    } else {
-      callback(new Error('Acceso no permitido'));
-    }
-  },
-};
+// const whiteList = ['http://localhost:8080', 'https://my-app.com'];
+// const options = {
+//   origen: (origen, callback) => {
+//     if (whiteList.includes(origen) || !origen) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Acceso no permitido'));
+//     }
+//   },
+// };
 
-app.use(cors(options));
+// app.use(cors(options));
+app.use(cors());
 require('./utils/auth');
 app.get('/', (req, res) => {
   res.send('Hola mi server en Express');
