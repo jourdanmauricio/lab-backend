@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-//const id = Joi.number().integer();
+const id = Joi.number().integer();
 //const userId = Joi.number().integer();
 //const mlUserId = Joi.number().integer();
 const nickname = Joi.string();
@@ -21,9 +21,9 @@ const createUserMLSchema = Joi.object({
 //   role: role,
 // });
 
-// const getUserSchema = Joi.object({
-//   id: id.required(),
-// });
+const getUserMlSchema = Joi.object({
+  id: id.required(),
+});
 
 // const updatePassUserSchema = Joi.object({
 //   id: id.required(),
@@ -41,7 +41,7 @@ const createUserMLSchema = Joi.object({
 module.exports = {
   createUserMLSchema,
   //   updateUserSchema,
-  //   getUserSchema,
+  getUserMlSchema,
   //   updatePassUserSchema,
   //   queryUserSchema,
 };

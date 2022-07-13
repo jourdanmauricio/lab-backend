@@ -2,16 +2,33 @@ const express = require('express');
 const axios = require('axios');
 const passport = require('passport');
 const { config } = require('../config/config');
-
+const validatorHandler = require('./../middlewares/validator.handler');
 // const passport = require('passport');
 
 const UserMlService = require('../services/userMl.service');
 const service = new UserMlService();
 
+const { getUserMlSchema } = require('./../schemas/userMl.schema');
+
 // const jwt = require('jsonwebtoken');
 // const { config } = require('./../config/config');
 
 const router = express.Router();
+
+router.get(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  validatorHandler(getUserMlSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const userMl = await service.findByUserId(id);
+      res.json(userMl);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 router.post(
   '/authML',

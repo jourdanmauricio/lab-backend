@@ -26,6 +26,15 @@ class UserMlService {
     return userMl;
   }
 
+  async findByUserId(userId) {
+    const userMl = await models.UserMl.findOne({
+      where: {
+        userId: userId,
+      },
+    });
+    return userMl;
+  }
+
   async update(token, changes) {
     const userMl = await this.findByToken(token);
     const rta = await userMl.update(changes);
