@@ -31,10 +31,11 @@ router.get('/callback', async (req, res, next) => {
       },
     });
 
-    res.status(200).json(resMl);
+    // res.status(200).json(resMl);
     // const res = await resMl.json();
-    // const rta = await service.update(state, resMl);
+    const rta = await service.update(state, resMl);
     // return rta;
+    res.status(200);
   } catch (error) {
     next(error);
   }
