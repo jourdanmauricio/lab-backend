@@ -30,7 +30,9 @@ router.get('/callback', async (req, res, next) => {
         redirect_uri: `${config.backEnd}/usersml/callback`,
       },
     });
-    const rta = await service.update(state, resMl);
+
+    const res = await resMl.json();
+    const rta = await service.update(state, res);
     return rta;
   } catch (error) {
     next(error);
