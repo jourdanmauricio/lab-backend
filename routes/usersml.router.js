@@ -56,7 +56,6 @@ router.get('/callback', async (req, res, next) => {
     };
 
     const resMl = await axios.post(`${config.mlApi}/oauth/token`, body);
-    console.log(resMl);
     const rta = await service.update(state, resMl);
     return rta;
   } catch (error) {

@@ -65,7 +65,7 @@ class UserMlService {
     });
 
     // retorno los datos para que el front redirija a ML auth app.
-    const rta = `https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=${config.mlAppId}&redirect_uri=${config.backEnd}/usersml/callback&status=${token}`;
+    const rta = `https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=${config.mlAppId}&redirect_uri=${config.backEnd}/usersml/callback&state=${token}`;
     return rta;
   }
 }
