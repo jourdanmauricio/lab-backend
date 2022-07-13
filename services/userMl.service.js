@@ -39,7 +39,7 @@ class UserMlService {
     const userMl = await this.findByToken(state);
     const rta = await userMl.update(resMl);
     // return rta;
-    return userMl;
+    return resMl;
   }
 
   async solAuthMl(req) {
