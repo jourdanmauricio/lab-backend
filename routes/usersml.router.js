@@ -35,7 +35,8 @@ router.get('/callback', async (req, res, next) => {
     // const res = await resMl.json();
     const rta = await service.update(state, resMl);
     // return rta;
-    res.status(200);
+    // res.status(200);
+    res.send('OK');
   } catch (error) {
     next(error);
   }
