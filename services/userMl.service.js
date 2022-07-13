@@ -17,6 +17,14 @@ class UserMlService {
     return newUserMl;
   }
 
+  async findOne(id) {
+    const user = await models.UserMl.findByPk(id);
+    if (!user) {
+      throw boom.notFound('user not found');
+    }
+    return user;
+  }
+
   async findByToken(token) {
     const userMl = await models.UserMl.findOne({
       where: {
@@ -38,8 +46,13 @@ class UserMlService {
   async update(state, resMl) {
     const userMl = await this.findByToken(state);
     const rta = await userMl.update(resMl);
-    // return rta;
-    return resMl;
+    return rta;
+  }
+
+  async delete(id) {
+    const user = await this.findOne(id);
+    await user.destroy();
+    return { user };
   }
 
   async solAuthMl(req) {

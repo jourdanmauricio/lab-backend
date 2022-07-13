@@ -80,7 +80,7 @@ class UserService {
 
   async findByEmail(email) {
     const rta = await models.User.findOne({
-      include: ['customer'],
+      include: ['customer', 'userMl'],
       where: { email },
     });
     return rta;

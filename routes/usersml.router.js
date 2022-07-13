@@ -30,11 +30,7 @@ router.get('/callback', async (req, res, next) => {
         redirect_uri: `${config.backEnd}/usersml/callback`,
       },
     });
-
-    // res.status(200).json(resMl);
-    // const res = await resMl.json();
     const rta = await service.update(state, resMl);
-    // return rta;
     res.status(200).json(rta);
     // res.send(state);
   } catch (error) {
@@ -70,4 +66,18 @@ router.post(
   }
 );
 
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  validatorHandler(getUserMlSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const user = await service.delete(id);
+      res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 module.exports = router;
