@@ -11,9 +11,31 @@ const service = new UserMlService();
 const { getUserMlSchema } = require('./../schemas/userMl.schema');
 
 // const jwt = require('jsonwebtoken');
-// const { config } = require('./../config/config');
 
 const router = express.Router();
+
+router.get('/callback', async (req, res, next) => {
+  try {
+    const { code, state } = req.query;
+    // GET ML -> change code for access_token
+
+    const resMl = await axios({
+      method: 'post',
+      url: `${config.mlApi}/oauth/token`,
+      data: {
+        grant_type: 'authorization_code',
+        client_id: config.mlAppId,
+        client_secret: config.mlSecret,
+        code: code,
+        redirect_uri: `${config.backEnd}/usersml/callback`,
+      },
+    });
+    const rta = await service.update(state, resMl);
+    return rta;
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get(
   '/:id',
@@ -42,25 +64,5 @@ router.post(
     }
   }
 );
-
-router.get('/callback', async (req, res, next) => {
-  try {
-    const { code, state } = req.params;
-    // GET ML -> change code for access_token
-    const body = {
-      grant_type: 'authorization_code',
-      client_id: config.mlAppId,
-      client_secret: config.mlSecret,
-      code: code,
-      redirect_uri: `${config.backEnd}/usersml/callback`,
-    };
-
-    const resMl = await axios.post(`${config.mlApi}/oauth/token`, body);
-    const rta = await service.update(state, resMl);
-    return rta;
-  } catch (error) {
-    next(error);
-  }
-});
 
 module.exports = router;
