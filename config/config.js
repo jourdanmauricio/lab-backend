@@ -17,6 +17,11 @@ const config = {
   mailerPassword: process.env.MAILER_PASSWORD,
   superAdminPass: process.env.SUPER_ADMIN_PASSWORD,
   frontEnd: process.env.FRONT_END,
+  mlRedirectUri: process.env.ML_REDIRECT_URI,
+  mlApi: process.env.ML_API,
+  mlAppId: process.env.ML_APP_ID,
+  mlSecret: process.env.ML_SECRET,
+  backEnd: process.env.BACK_END,
 };
 // console.log('Config', config);
 
