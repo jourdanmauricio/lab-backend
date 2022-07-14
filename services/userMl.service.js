@@ -9,7 +9,10 @@ class UserMlService {
     if (!newUserMl) {
       throw boom.notFound('user not found');
     }
-    return newUserMl;
+
+    const user = await models.User.findByPk(newUserMl.id);
+    return user;
+    // return newUserMl;
   }
 
   async findOne(id) {
@@ -20,29 +23,30 @@ class UserMlService {
     return user;
   }
 
-  async findByUserId(userId) {
-    const userMl = await models.UserMl.findOne({
-      where: {
-        userId: userId,
-      },
-    });
-    if (!userMl) {
-      throw boom.notFound('user not found');
-    }
-    return userMl;
-  }
+  // async findByUserId(userId) {
+  //   const userMl = await models.UserMl.findOne({
+  //     where: {
+  //       userId: userId,
+  //     },
+  //   });
+  //   if (!userMl) {
+  //     throw boom.notFound('user not found');
+  //   }
+  //   return userMl;
+  // }
 
-  async update(id, changes) {
-    const userMl = await this.findByUserId(id);
-    await userMl.update(changes);
-    const user = await models.User.findByPk(id);
+  // async update(id, changes) {
+  //   const userMl = await this.findByUserId(id);
+  //   await userMl.update(changes);
+  //   const user = await models.User.findByPk(id);
 
-    return user;
-  }
+  //   return user;
+  // }
 
   async delete(id) {
-    const user = await this.findOne(id);
-    await user.destroy();
+    const userMl = await this.findOne(id);
+    const user = await models.User.findByPk(userMl.userId);
+    await userMl.destroy();
     return { user };
   }
 }
