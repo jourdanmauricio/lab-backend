@@ -10,7 +10,6 @@ const tokenType = Joi.string();
 const expiresIn = Joi.number().integer();
 const refreshToken = Joi.string();
 //const endAt = Joi.date();
-const authMlToken = Joi.string();
 const address = Joi.object();
 const buyerReputation = Joi.object();
 const company = Joi.object();
@@ -25,22 +24,20 @@ const permalink = Joi.string();
 const phone = Joi.object();
 const sellerReputation = Joi.object();
 const siteId = Joi.string();
-const token = Joi.string();
+
+// const createUserMLSchema = Joi.object({
+//   nickname: nickname.required(),
+// });
 
 const createUserMLSchema = Joi.object({
+  mlUserId: mlUserId.required(),
+  userId: userId.required(),
   nickname: nickname.required(),
-});
-
-const updateUserMlSchema = Joi.object({
-  mlUserId,
-  userId,
-  nickname,
-  accessToken,
-  tokenType,
-  scope,
-  expiresIn,
-  refreshToken,
-  authMlToken,
+  accessToken: accessToken.required(),
+  tokenType: tokenType.required(),
+  scope: scope.required(),
+  expiresIn: expiresIn.required(),
+  refreshToken: refreshToken.required(),
   address,
   buyerReputation,
   company,
@@ -56,7 +53,6 @@ const updateUserMlSchema = Joi.object({
   phone,
   sellerReputation,
   siteId,
-  token,
 });
 
 const getUserMlSchema = Joi.object({
@@ -78,7 +74,7 @@ const getUserMlSchema = Joi.object({
 
 module.exports = {
   createUserMLSchema,
-  updateUserMlSchema,
+  // updateUserMlSchema,
   getUserMlSchema,
   //   updatePassUserSchema,
   //   queryUserSchema,

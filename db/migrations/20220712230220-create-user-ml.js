@@ -58,12 +58,6 @@ module.exports = {
         type: DataTypes.STRING(),
         field: 'refresh_token',
       },
-      authMlToken: {
-        unique: true,
-        allowNull: true,
-        type: DataTypes.STRING(),
-        field: 'auth_ml_token',
-      },
       endAt: {
         allowNull: true,
         type: DataTypes.DATE(),

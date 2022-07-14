@@ -8,7 +8,7 @@ const service = new UserMlService();
 
 const {
   getUserMlSchema,
-  updateUserMlSchema,
+  createUserMLSchema,
 } = require('./../schemas/userMl.schema');
 
 // const jwt = require('jsonwebtoken');
@@ -33,7 +33,7 @@ router.get(
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(updateUserMlSchema, 'body'),
+  validatorHandler(createUserMLSchema, 'body'),
   async (req, res, next) => {
     try {
       const { mlUser } = req.body;
