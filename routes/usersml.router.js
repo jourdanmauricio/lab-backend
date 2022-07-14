@@ -8,7 +8,7 @@ const service = new UserMlService();
 
 const {
   getUserMlSchema,
-  updateUserMlSchema,
+  //updateUserMlSchema,
 } = require('./../schemas/userMl.schema');
 
 // const jwt = require('jsonwebtoken');
@@ -46,8 +46,8 @@ router.post(
 router.patch(
   '/authML/:id',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(getUserMlSchema, 'params'),
-  validatorHandler(updateUserMlSchema, 'body'),
+  // validatorHandler(getUserMlSchema, 'params'),
+  // validatorHandler(updateUserMlSchema, 'body'),
   async (req, res, next) => {
     try {
       res.status(200).json(req);
