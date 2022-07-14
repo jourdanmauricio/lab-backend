@@ -33,27 +33,13 @@ router.get(
 router.post(
   '/authML',
   passport.authenticate('jwt', { session: false }),
-  async (req, res, next) => {
-    try {
-      const rta = await service.solAuthMl(req);
-      res.status(200).json(rta);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-router.patch(
-  '/authML/:id',
-  passport.authenticate('jwt', { session: false }),
   validatorHandler(getUserMlSchema, 'params'),
   validatorHandler(updateUserMlSchema, 'body'),
   async (req, res, next) => {
     try {
-      const { id } = req.params;
       const { mlUser } = req.body;
-      const rta = await service.update(id, mlUser);
-      res.status(200).json(rta);
+      const rta = await service.create(mlUser);
+      res.status(201).json(rta);
     } catch (error) {
       next(error);
     }
