@@ -32,7 +32,7 @@ class UserMlService {
     const user = await models.User.findByPk(userId, {
       include: ['customer', 'userMl'],
     });
-    return { user };
+    return user;
   }
 }
 
