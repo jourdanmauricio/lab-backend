@@ -33,7 +33,6 @@ router.get(
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(getUserMlSchema, 'params'),
   validatorHandler(updateUserMlSchema, 'body'),
   async (req, res, next) => {
     try {
