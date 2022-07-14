@@ -49,9 +49,9 @@ router.patch(
   validatorHandler(getUserMlSchema, 'params'),
   validatorHandler(updateUserMlSchema, 'body'),
   async (req, res, next) => {
+    // res.status(200).json(req.body);
     try {
-      // const { token, mlUser } = req.token;
-      const rta = await service.updateMl(req);
+      const rta = await service.updateMl(req.body);
       res.status(200).json(rta);
     } catch (error) {
       next(error);
