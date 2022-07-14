@@ -59,7 +59,7 @@ class UserMlService {
     }
 
     changes.authMlToken = '';
-    delete changes.token;
+    // delete changes.token;
 
     // const userMl = await this.findByUserId(user.id);
 
