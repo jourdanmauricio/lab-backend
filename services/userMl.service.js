@@ -54,6 +54,13 @@ class UserMlService {
     const payload = await jwt.verify(token, config.jwtSecret);
     const userMl = await this.findByUserId(payload.sub);
 
+    const respuesta = {
+      token_base: userMl.authMlToken,
+      token: token,
+      nick_base: userMl.nickname,
+      nick: changes.nickname,
+    };
+
     // if (userMl.authMlToken !== token) {
     //   throw boom.unauthorized();
     // }
@@ -69,8 +76,8 @@ class UserMlService {
 
     // return user;
     // const rta = await userMl.update(changes);
-    return userMl;
-    // return token;
+    // return userMl;
+    return respuesta;
   }
 
   async delete(id) {
