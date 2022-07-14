@@ -25,32 +25,12 @@ class UserMlService {
     return userMl;
   }
 
-  // async findByUserId(userId) {
-  //   const userMl = await models.UserMl.findOne({
-  //     where: {
-  //       userId: userId,
-  //     },
-  //   });
-  //   if (!userMl) {
-  //     throw boom.notFound('user not found');
-  //   }
-  //   return userMl;
-  // }
-
-  // async update(id, changes) {
-  //   const userMl = await this.findByUserId(id);
-  //   await userMl.update(changes);
-  //   const user = await models.User.findByPk(id);
-
-  //   return user;
-  // }
-
   async delete(id) {
     const userMl = await this.findOne(id);
+    await userMl.destroy();
     const user = await models.User.findByPk(userMl.userId, {
       include: ['customer', 'userMl'],
     });
-    await userMl.destroy();
     return { user };
   }
 }
