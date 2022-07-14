@@ -27,8 +27,9 @@ class UserMlService {
 
   async delete(id) {
     const userMl = await this.findOne(id);
+    const userId = userMl.userId;
     await userMl.destroy();
-    const user = await models.User.findByPk(userMl.userId, {
+    const user = await models.User.findByPk(userId, {
       include: ['customer', 'userMl'],
     });
     return { user };
