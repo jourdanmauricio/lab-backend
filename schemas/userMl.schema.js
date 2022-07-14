@@ -11,6 +11,20 @@ const expiresIn = Joi.number().integer();
 const refreshToken = Joi.string();
 //const endAt = Joi.date();
 const authMlToken = Joi.string();
+const address = Joi.object();
+const buyerReputation = Joi.object();
+const company = Joi.object();
+const countryId = Joi.string();
+const email = Joi.string();
+const firstName = Joi.string();
+const gender = Joi.string();
+const identification = Joi.object();
+const lastName = Joi.string();
+const logo = Joi.string();
+const permalink = Joi.string();
+const phone = Joi.object();
+const sellerReputation = Joi.object();
+const siteId = Joi.string();
 
 const createUserMLSchema = Joi.object({
   nickname: nickname.required(),
@@ -25,6 +39,21 @@ const updateUserMlSchema = Joi.object({
   expiresIn,
   refreshToken,
   authMlToken,
+  address,
+  buyerReputation,
+  company,
+  countryId,
+  email,
+  firstName,
+  gender,
+  id,
+  identification,
+  lastName,
+  logo,
+  permalink,
+  phone,
+  sellerReputation,
+  siteId,
 });
 
 const getUserMlSchema = Joi.object({

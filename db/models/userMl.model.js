@@ -56,6 +56,68 @@ const UserMlSchema = {
     type: DataTypes.DATE(),
     field: 'end_at',
   },
+  address: {
+    allowNull: true,
+    type: DataTypes.JSONB,
+  },
+  buyerReputation: {
+    allowNull: true,
+    type: DataTypes.JSONB,
+    field: 'buyer_reputation',
+  },
+  company: {
+    allowNull: true,
+    type: DataTypes.JSONB,
+  },
+  countryId: {
+    allowNull: true,
+    type: DataTypes.STRING(10),
+    field: 'country_id',
+  },
+  email: {
+    allowNull: true,
+    type: DataTypes.STRING(),
+  },
+  firstName: {
+    allowNull: true,
+    type: DataTypes.STRING(),
+    field: 'first_name',
+  },
+  gender: {
+    allowNull: true,
+    type: DataTypes.STRING(1),
+  },
+  identification: {
+    allowNull: true,
+    type: DataTypes.JSONB,
+  },
+  lastName: {
+    allowNull: true,
+    type: DataTypes.STRING(),
+    field: 'last_name',
+  },
+  logo: {
+    allowNull: true,
+    type: DataTypes.STRING(),
+  },
+  permalink: {
+    allowNull: true,
+    type: DataTypes.STRING(),
+  },
+  phone: {
+    allowNull: true,
+    type: DataTypes.JSONB,
+  },
+  sellerReputation: {
+    allowNull: true,
+    type: DataTypes.JSONB,
+    field: 'seller_reputation',
+  },
+  siteId: {
+    allowNull: true,
+    type: DataTypes.STRING(3),
+    field: 'site_id',
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
