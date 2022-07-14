@@ -51,12 +51,12 @@ class UserMlService {
 
   async updateMl(changes) {
     const token = changes.token;
-    const payload = await jwt.verify(token, config.jwtSecret);
-    const userMl = await this.findByUserId(payload.sub);
+    // const payload = await jwt.verify(token, config.jwtSecret);
+    // const userMl = await this.findByUserId(payload.sub);
 
-    if (userMl.authMlToken !== token) {
-      throw boom.unauthorized();
-    }
+    // if (userMl.authMlToken !== token) {
+    //   throw boom.unauthorized();
+    // }
 
     // changes.authMlToken = '';
     // delete changes.token;
@@ -69,7 +69,8 @@ class UserMlService {
 
     // return user;
     // const rta = await userMl.update(changes);
-    return userMl;
+    // return userMl;
+    return token;
   }
 
   async delete(id) {
