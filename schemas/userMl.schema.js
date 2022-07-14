@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-//const userId = Joi.number().integer();
+const userId = Joi.number().integer();
 const mlUserId = Joi.number().integer();
 const nickname = Joi.string();
 const accessToken = Joi.string();
@@ -33,6 +33,7 @@ const createUserMLSchema = Joi.object({
 
 const updateUserMlSchema = Joi.object({
   mlUserId,
+  userId,
   nickname,
   accessToken,
   tokenType,
