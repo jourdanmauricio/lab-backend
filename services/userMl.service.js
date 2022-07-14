@@ -54,9 +54,9 @@ class UserMlService {
     const payload = await jwt.verify(token, config.jwtSecret);
     const user = await service.findOne(payload.sub);
 
-    if (user.authMlToken !== token) {
-      throw boom.unauthorized();
-    }
+    // if (user.authMlToken !== token) {
+    //   throw boom.unauthorized();
+    // }
 
     changes.token = '';
 
