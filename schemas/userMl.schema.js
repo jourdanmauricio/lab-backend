@@ -25,6 +25,7 @@ const permalink = Joi.string();
 const phone = Joi.object();
 const sellerReputation = Joi.object();
 const siteId = Joi.string();
+const token = Joi.string();
 
 const createUserMLSchema = Joi.object({
   nickname: nickname.required(),
@@ -54,6 +55,7 @@ const updateUserMlSchema = Joi.object({
   phone,
   sellerReputation,
   siteId,
+  token,
 });
 
 const getUserMlSchema = Joi.object({
