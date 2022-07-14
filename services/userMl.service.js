@@ -40,6 +40,9 @@ class UserMlService {
         userId: userId,
       },
     });
+    if (!userMl) {
+      throw boom.notFound('user not found');
+    }
     return userMl;
   }
 
@@ -49,35 +52,17 @@ class UserMlService {
   //   return rta;
   // }
 
-  async updateMl(changes) {
-    const token = changes.token;
-    const payload = await jwt.verify(token, config.jwtSecret);
-    const userMl = await this.findByUserId(payload.sub);
+  async updateMl(id, changes) {
+    const userMl = await this.findByUserId(id);
 
-    const respuesta = {
-      token_base: userMl.authMlToken,
-      token: token,
-      nick_base: userMl.nickname,
-      nick: changes.nickname,
-    };
+    changes.authMlToken = '';
 
-    // if (userMl.authMlToken !== token) {
-    //   throw boom.unauthorized();
-    // }
+    if (userMl.nickname !== changes.nickname) {
+      throw boom.unauthorized();
+    }
 
-    // changes.authMlToken = '';
-    // delete changes.token;
-
-    // const userMl = await this.findByUserId(user.id);
-
-    // if (userMl.nickname !== changes.nickname) {
-    //   throw boom.unauthorized();
-    // }
-
-    // return user;
-    // const rta = await userMl.update(changes);
-    // return userMl;
-    return respuesta;
+    const rta = await userMl.update(changes);
+    return rta;
   }
 
   async delete(id) {
