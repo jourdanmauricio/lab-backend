@@ -67,8 +67,8 @@ class UserMlService {
     }
 
     // return user;
-    const rta = await userMl.update(changes);
-    return rta;
+    // const rta = await userMl.update(changes);
+    return userMl;
   }
 
   async delete(id) {
