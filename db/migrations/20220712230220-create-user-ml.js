@@ -49,6 +49,10 @@ module.exports = {
         type: DataTypes.INTEGER,
         field: 'expires_in',
       },
+      scope: {
+        allowNull: true,
+        type: DataTypes.STRING(50),
+      },
       refreshToken: {
         allowNull: true,
         type: DataTypes.STRING(),
