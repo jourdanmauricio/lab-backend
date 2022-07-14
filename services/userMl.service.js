@@ -54,20 +54,22 @@ class UserMlService {
     const payload = await jwt.verify(token, config.jwtSecret);
     const user = await service.findOne(payload.sub);
 
-    if (user.authMlToken !== token) {
-      throw boom.unauthorized();
-    }
+    return user;
 
-    changes.token = '';
+    // if (user.authMlToken !== token) {
+    //   throw boom.unauthorized();
+    // }
 
-    const userMl = await this.findByUserId(user.id);
+    // changes.token = '';
 
-    if (userMl.nickname !== changes.nickname) {
-      throw boom.unauthorized();
-    }
+    // const userMl = await this.findByUserId(user.id);
 
-    const rta = await userMl.update(changes);
-    return rta;
+    // if (userMl.nickname !== changes.nickname) {
+    //   throw boom.unauthorized();
+    // }
+
+    // const rta = await userMl.update(changes);
+    // return rta;
   }
 
   async delete(id) {
