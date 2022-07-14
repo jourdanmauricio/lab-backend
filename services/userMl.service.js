@@ -60,6 +60,11 @@ class UserMlService {
     changes.authMlToken = '';
 
     const userMl = await this.findByUserId(user.id);
+
+    if (userMl.nickname !== changes.nickname) {
+      throw boom.unauthorized();
+    }
+
     const rta = await userMl.update(changes);
     return rta;
   }
