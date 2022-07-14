@@ -58,7 +58,8 @@ class UserMlService {
       throw boom.unauthorized();
     }
 
-    changes.token = '';
+    changes.authMlToken = '';
+    delete changes.token;
 
     // const userMl = await this.findByUserId(user.id);
 
