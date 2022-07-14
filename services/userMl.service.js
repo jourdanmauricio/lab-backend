@@ -52,14 +52,8 @@ class UserMlService {
   //   return rta;
   // }
 
-  async updateMl(id, changes) {
+  async update(id, changes) {
     const userMl = await this.findByUserId(id);
-
-    changes.authMlToken = '';
-
-    if (userMl.nickname !== changes.nickname) {
-      throw boom.unauthorized();
-    }
 
     const rta = await userMl.update(changes);
     return rta;

@@ -52,7 +52,7 @@ router.patch(
     try {
       const { id } = req.params;
       const { mlUser } = req.body;
-      const rta = await service.updateMl(id, mlUser);
+      const rta = await service.update(id, mlUser);
       res.status(200).json(rta);
     } catch (error) {
       next(error);
