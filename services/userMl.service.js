@@ -10,17 +10,19 @@ class UserMlService {
       throw boom.notFound('user not found');
     }
 
-    const user = await models.User.findByPk(newUserMl.id);
+    const user = await models.User.findByPk(newUserMl.id, {
+      include: ['customer', 'userMl'],
+    });
     return user;
     // return newUserMl;
   }
 
   async findOne(id) {
-    const user = await models.UserMl.findByPk(id);
-    if (!user) {
+    const userMl = await models.UserMl.findByPk(id);
+    if (!userMl) {
       throw boom.notFound('user not found');
     }
-    return user;
+    return userMl;
   }
 
   // async findByUserId(userId) {
@@ -45,7 +47,9 @@ class UserMlService {
 
   async delete(id) {
     const userMl = await this.findOne(id);
-    const user = await models.User.findByPk(userMl.userId);
+    const user = await models.User.findByPk(userMl.userId, {
+      include: ['customer', 'userMl'],
+    });
     await userMl.destroy();
     return { user };
   }
