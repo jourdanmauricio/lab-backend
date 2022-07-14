@@ -10,7 +10,7 @@ class UserMlService {
       throw boom.notFound('user not found');
     }
 
-    const user = await models.User.findByPk(newUserMl.id, {
+    const user = await models.User.findByPk(newUserMl.userId, {
       include: ['customer', 'userMl'],
     });
     return user;
