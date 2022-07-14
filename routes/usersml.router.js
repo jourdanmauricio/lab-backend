@@ -31,7 +31,7 @@ router.get(
 );
 
 router.post(
-  '/authML',
+  '/',
   passport.authenticate('jwt', { session: false }),
   validatorHandler(getUserMlSchema, 'params'),
   validatorHandler(updateUserMlSchema, 'body'),
