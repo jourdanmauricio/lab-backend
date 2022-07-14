@@ -8,11 +8,7 @@ function validatorHandler(schema, property) {
     // para que envíe todos los errores juntos
     const { error } = schema.validate(data, { abortEarly: false });
     if (error) {
-      const data = {
-        message: error.message,
-        statusCode: 400,
-      };
-      next(boom.badRequest(data));
+      next(boom.badRequest(error));
     }
     next(); //si no hay error sigue
   };
