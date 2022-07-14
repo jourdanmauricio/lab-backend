@@ -20,15 +20,6 @@ class UserMlService {
     return user;
   }
 
-  // async findByToken(token) {
-  //   const userMl = await models.UserMl.findOne({
-  //     where: {
-  //       authMlToken: token,
-  //     },
-  //   });
-  //   return userMl;
-  // }
-
   async findByUserId(userId) {
     const userMl = await models.UserMl.findOne({
       where: {
@@ -41,17 +32,12 @@ class UserMlService {
     return userMl;
   }
 
-  // async update(state, resMl) {
-  //   const userMl = await this.findByToken(state);
-  //   const rta = await userMl.update(resMl);
-  //   return rta;
-  // }
-
   async update(id, changes) {
     const userMl = await this.findByUserId(id);
+    await userMl.update(changes);
+    const user = await models.User.findByPk(id);
 
-    const rta = await userMl.update(changes);
-    return rta;
+    return user;
   }
 
   async delete(id) {
