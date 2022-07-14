@@ -9,7 +9,7 @@ function validatorHandler(schema, property) {
     const { error } = schema.validate(data, { abortEarly: false });
     if (error) {
       const data = {
-        message: error,
+        message: error.message,
         statusCode: 400,
       };
       next(boom.badRequest(data));
