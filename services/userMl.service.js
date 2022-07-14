@@ -52,7 +52,7 @@ class UserMlService {
   async updateMl(changes) {
     const token = changes.token;
     const payload = await jwt.verify(token, config.jwtSecret);
-    const user = await this.findOne(payload.sub);
+    const user = await this.findByUserId(payload.sub);
 
     return user;
 
