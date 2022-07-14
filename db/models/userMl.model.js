@@ -9,7 +9,7 @@ const UserMlSchema = {
     type: DataTypes.INTEGER,
   },
   userId: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.INTEGER,
     field: 'user_id',
   },

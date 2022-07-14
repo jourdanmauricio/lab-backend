@@ -36,7 +36,7 @@ router.post(
   validatorHandler(createUserMLSchema, 'body'),
   async (req, res, next) => {
     try {
-      const { mlUser } = req.body;
+      const mlUser = req.body;
       const rta = await service.create(mlUser);
       res.status(201).json(rta);
     } catch (error) {
