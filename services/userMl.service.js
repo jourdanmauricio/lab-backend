@@ -54,12 +54,12 @@ class UserMlService {
     const payload = await jwt.verify(token, config.jwtSecret);
     const userMl = await this.findByUserId(payload.sub);
 
-    //if (userMl.authMlToken !== token) {
-    //   throw boom.unauthorized();
-    // }
+    if (userMl.authMlToken !== token) {
+      throw boom.unauthorized();
+    }
 
-    // changes.authMlToken = '';
-    // delete changes.token;
+    changes.authMlToken = '';
+    delete changes.token;
 
     // const userMl = await this.findByUserId(user.id);
 
