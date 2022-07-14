@@ -2,24 +2,30 @@ const Joi = require('joi');
 
 const id = Joi.number().integer();
 //const userId = Joi.number().integer();
-//const mlUserId = Joi.number().integer();
+const mlUserId = Joi.number().integer();
 const nickname = Joi.string();
-//const accessToken = Joi.string();
-//const tokenType = Joi.string();
-//const expiresIn = Joi.number().integer();
-//const refreshToken = Joi.string();
+const accessToken = Joi.string();
+const scope = Joi.string();
+const tokenType = Joi.string();
+const expiresIn = Joi.number().integer();
+const refreshToken = Joi.string();
 //const endAt = Joi.date();
-// const authMlToken = Joi.string();
+const authMlToken = Joi.string();
 
 const createUserMLSchema = Joi.object({
   nickname: nickname.required(),
 });
 
-// const updateUserSchema = Joi.object({
-//   email: email,
-//   password: password,
-//   role: role,
-// });
+const updateUserMlSchema = Joi.object({
+  mlUserId,
+  nickname,
+  accessToken,
+  tokenType,
+  scope,
+  expiresIn,
+  refreshToken,
+  authMlToken,
+});
 
 const getUserMlSchema = Joi.object({
   id: id.required(),
@@ -40,7 +46,7 @@ const getUserMlSchema = Joi.object({
 
 module.exports = {
   createUserMLSchema,
-  //   updateUserSchema,
+  updateUserMlSchema,
   getUserMlSchema,
   //   updatePassUserSchema,
   //   queryUserSchema,

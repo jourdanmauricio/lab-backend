@@ -1,42 +1,19 @@
 const express = require('express');
-const axios = require('axios');
 const passport = require('passport');
-const { config } = require('../config/config');
 const validatorHandler = require('./../middlewares/validator.handler');
 // const passport = require('passport');
 
 const UserMlService = require('../services/userMl.service');
 const service = new UserMlService();
 
-const { getUserMlSchema } = require('./../schemas/userMl.schema');
+const {
+  getUserMlSchema,
+  updateUserMlSchema,
+} = require('./../schemas/userMl.schema');
 
 // const jwt = require('jsonwebtoken');
 
 const router = express.Router();
-
-router.get('/callback', async (req, res, next) => {
-  try {
-    const { code, state } = req.query;
-    // GET ML -> change code for access_token
-
-    const resMl = await axios({
-      method: 'post',
-      url: `${config.mlApi}/oauth/token`,
-      data: {
-        grant_type: 'authorization_code',
-        client_id: config.mlAppId,
-        client_secret: config.mlSecret,
-        code: code,
-        redirect_uri: `${config.backEnd}/usersml/callback`,
-      },
-    });
-    const rta = await service.update(state, resMl);
-    res.status(200).json(rta);
-    // res.send(state);
-  } catch (error) {
-    next(error);
-  }
-});
 
 router.get(
   '/:id',
@@ -59,6 +36,22 @@ router.post(
   async (req, res, next) => {
     try {
       const rta = await service.solAuthMl(req);
+      res.status(200).json(rta);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.patch(
+  '/authML/:id',
+  passport.authenticate('jwt', { session: false }),
+  validatorHandler(getUserMlSchema, 'params'),
+  validatorHandler(updateUserMlSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { token, credentialsMl } = req.token;
+      const rta = await service.updateMl(token, credentialsMl);
       res.status(200).json(rta);
     } catch (error) {
       next(error);

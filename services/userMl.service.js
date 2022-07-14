@@ -25,14 +25,14 @@ class UserMlService {
     return user;
   }
 
-  async findByToken(token) {
-    const userMl = await models.UserMl.findOne({
-      where: {
-        authMlToken: token,
-      },
-    });
-    return userMl;
-  }
+  // async findByToken(token) {
+  //   const userMl = await models.UserMl.findOne({
+  //     where: {
+  //       authMlToken: token,
+  //     },
+  //   });
+  //   return userMl;
+  // }
 
   async findByUserId(userId) {
     const userMl = await models.UserMl.findOne({
@@ -43,9 +43,24 @@ class UserMlService {
     return userMl;
   }
 
-  async update(state, resMl) {
-    const userMl = await this.findByToken(state);
-    const rta = await userMl.update(resMl);
+  // async update(state, resMl) {
+  //   const userMl = await this.findByToken(state);
+  //   const rta = await userMl.update(resMl);
+  //   return rta;
+  // }
+
+  async updateMl(token, changes) {
+    const payload = await jwt.verify(token, config.jwtSecret);
+    const user = await service.findOne(payload.sub);
+
+    if (user.authMlToken !== token) {
+      throw boom.unauthorized();
+    }
+
+    changes.authMlToken = '';
+
+    const userMl = await this.findByUserId(user.id);
+    const rta = await userMl.update(changes);
     return rta;
   }
 

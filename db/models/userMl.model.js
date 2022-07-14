@@ -32,6 +32,10 @@ const UserMlSchema = {
     type: DataTypes.STRING(20),
     field: 'token_type',
   },
+  scope: {
+    allowNull: true,
+    type: DataTypes.STRING(50),
+  },
   expiresIn: {
     allowNull: true,
     type: DataTypes.INTEGER,
