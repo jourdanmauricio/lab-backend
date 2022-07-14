@@ -62,9 +62,9 @@ class UserMlService {
 
     // const userMl = await this.findByUserId(user.id);
 
-    if (userMl.nickname !== changes.nickname) {
-      throw boom.unauthorized();
-    }
+    // if (userMl.nickname !== changes.nickname) {
+    //   throw boom.unauthorized();
+    // }
 
     // return user;
     // const rta = await userMl.update(changes);
