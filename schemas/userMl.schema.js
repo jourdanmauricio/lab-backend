@@ -25,10 +25,6 @@ const phone = Joi.object();
 const sellerReputation = Joi.object();
 const siteId = Joi.string();
 
-// const createUserMLSchema = Joi.object({
-//   nickname: nickname.required(),
-// });
-
 const createUserMLSchema = Joi.object({
   mlUserId: mlUserId.required(),
   userId: userId.required(),
@@ -59,13 +55,6 @@ const getUserMlSchema = Joi.object({
   id: id.required(),
 });
 
-// const updatePassUserSchema = Joi.object({
-//   id: id.required(),
-//   email: email.required(),
-//   password: password.required(),
-//   newPassword: password.required(),
-// });
-
 // const queryUserSchema = Joi.object({
 //   limit,
 //   offset,
@@ -74,8 +63,6 @@ const getUserMlSchema = Joi.object({
 
 module.exports = {
   createUserMLSchema,
-  // updateUserMlSchema,
   getUserMlSchema,
-  //   updatePassUserSchema,
   //   queryUserSchema,
 };

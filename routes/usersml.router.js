@@ -45,6 +45,22 @@ router.post(
   }
 );
 
+router.put(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  validatorHandler(createUserMLSchema, 'body'),
+  validatorHandler(getUserMlSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const mlUser = req.body;
+      const rta = await service.update(mlUser);
+      res.status(200).json(rta);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
