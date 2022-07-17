@@ -16,12 +16,13 @@ class ProductsService {
 
   async create(data) {
     const newProduct = await models.Product.create(data);
+    newProduct.mlId = data.mlId;
     return newProduct;
   }
 
   async find(query) {
     const options = {
-      include: ['productMl'],
+      include: ['prodMl'],
       where: {},
       order: [['updated_at', 'DESC']],
     };

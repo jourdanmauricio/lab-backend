@@ -17,7 +17,7 @@ module.exports = {
         references: { model: PRODUCT_TABLE, key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        field: 'ml_id',
+        field: 'prod_id',
       },
       price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
       quantity: { type: DataTypes.INTEGER, allowNull: false },

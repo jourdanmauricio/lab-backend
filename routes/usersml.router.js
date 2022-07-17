@@ -8,7 +8,8 @@ const service = new UserMlService();
 
 const {
   getUserMlSchema,
-  createUserMLSchema,
+  createUserMlSchema,
+  updateUserMlSchema,
 } = require('./../schemas/userMl.schema');
 
 // const jwt = require('jsonwebtoken');
@@ -33,7 +34,7 @@ router.get(
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(createUserMLSchema, 'body'),
+  validatorHandler(createUserMlSchema, 'body'),
   async (req, res, next) => {
     try {
       const mlUser = req.body;
@@ -48,12 +49,13 @@ router.post(
 router.put(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(createUserMLSchema, 'body'),
+  validatorHandler(updateUserMlSchema, 'body'),
   validatorHandler(getUserMlSchema, 'params'),
   async (req, res, next) => {
     try {
+      const { id } = req.params;
       const mlUser = req.body;
-      const rta = await service.update(mlUser);
+      const rta = await service.update(id, mlUser);
       res.status(200).json(rta);
     } catch (error) {
       next(error);
