@@ -1,11 +1,10 @@
 const Joi = require('joi');
 
-const id = Joi.number().integer();
-const mlId = Joi.string().min(3).max(20);
+const id = Joi.string().min(3).max(20);
 const name = Joi.string().min(3).max(100);
 const fullName = Joi.string();
 const pathFromRoot = Joi.array();
-const picture = Joi.string().uri();
+const picture = Joi.string().allow(null, '').uri();
 const settings = Joi.object();
 const attributes = Joi.array();
 const attributes_oblg = Joi.object();
@@ -16,7 +15,7 @@ const offset = Joi.number().integer();
 const q = Joi.string();
 
 const createCategorySchema = Joi.object({
-  mlId: mlId,
+  id: id.required(),
   name: name.required(),
   fullName: fullName,
   pathFromRoot: pathFromRoot,

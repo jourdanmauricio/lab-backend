@@ -1,12 +1,17 @@
 const boom = require('@hapi/boom');
 
 const { models } = require('../libs/sequelize');
-const { Op } = require('sequelize');
+// const { Op } = require('sequelize');
 
 class ProductsService {
   constructor() {
     this.products = [];
     // this.generate();
+  }
+
+  async findOne(id) {
+    const product = await models.Product.findByPk(id);
+    return product;
   }
 
   async create(data) {
@@ -16,36 +21,43 @@ class ProductsService {
 
   async find(query) {
     const options = {
-      include: ['category'],
+      include: ['productMl'],
       where: {},
+      order: [['updated_at', 'DESC']],
     };
-    const { limit, offset, price, price_min, price_max } = query;
+    // const { limit, offset, price, price_min, price_max } = query;
+    const { limit, offset } = query;
     if (limit && offset) {
       options.limit = limit;
       options.offset = offset;
     }
-    if (price) {
-      options.where.price = price;
-    }
-    if (price_min && price_max) {
-      options.where.price = {
-        [Op.gte]: price_min,
-        [Op.lte]: price_max,
-      };
-    }
-    const products = await models.Product.findAll(options);
-    return products;
-  }
+    // if (price) {
+    //   options.where.price = price;
+    // }
+    // if (price_min && price_max) {
+    //   options.where.price = {
+    //     [Op.gte]: price_min,
+    //     [Op.lte]: price_max,
+    //   };
+    // }
 
-  async findOne(id) {
-    const product = this.products.find((item) => item.id === id);
-    if (!product) {
-      throw boom.notFound('product not found');
+    const count = await models.Product.count(options);
+
+    if (limit && offset) {
+      (options.limit = limit), (options.offset = offset);
     }
-    if (product.isBlock) {
-      throw boom.conflict('product is block');
-    }
-    return product;
+
+    const products = await models.Product.findAll(options);
+
+    const rta = {
+      paging: {
+        total: count,
+        offset: offset,
+        limit: limit,
+      },
+      results: products,
+    };
+    return rta;
   }
 
   async update(id, changes) {
@@ -62,11 +74,8 @@ class ProductsService {
   }
 
   async delete(id) {
-    const index = this.products.findIndex((item) => item.id === id);
-    if (index === -1) {
-      throw boom.notFound('product not found');
-    }
-    this.products.splice(index, 1);
+    const product = await this.findOne(id);
+    await product.destroy();
     return { id };
   }
 }

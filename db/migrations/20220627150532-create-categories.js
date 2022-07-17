@@ -7,20 +7,13 @@ module.exports = {
   async up(queryInterface) {
     await queryInterface.createTable(CATEGORY_TABLE, {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-      },
-      mlId: {
         type: DataTypes.STRING(20),
-        unique: true,
-        allowNull: true,
-        field: 'ml_id',
+        primaryKey: true,
+        autoIncrement: false,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING(100),
-        unique: true,
         allowNull: false,
       },
       fullName: {

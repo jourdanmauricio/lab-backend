@@ -28,6 +28,15 @@ router.get(
   }
 );
 
+router.get('/all', async (req, res, next) => {
+  try {
+    const categories = await service.findAllCat();
+    res.json(categories);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get(
   '/:id',
   validatorHandler(getCategorySchema, 'params'),

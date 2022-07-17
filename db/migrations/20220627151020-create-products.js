@@ -15,10 +15,7 @@ module.exports = {
       },
       attributes: { type: DataTypes.JSONB, allowNull: true },
       name: { type: DataTypes.STRING, allowNull: false },
-      video: { type: DataTypes.STRING, allowNull: true },
-      description: { type: DataTypes.TEXT, allowNull: true },
       price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-      condition: { type: DataTypes.STRING, allowNull: false },
       quantity: { type: DataTypes.INTEGER, allowNull: false },
       soldQuantity: {
         type: DataTypes.INTEGER,
@@ -42,7 +39,7 @@ module.exports = {
       categoryId: {
         field: 'category_id',
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         references: { model: CATEGORY_TABLE, key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',

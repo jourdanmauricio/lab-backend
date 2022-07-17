@@ -10,10 +10,8 @@ const ProductSchema = {
   },
   attributes: { type: DataTypes.JSONB, allowNull: true },
   name: { type: DataTypes.STRING, allowNull: false },
-  video: { type: DataTypes.STRING, allowNull: true },
-  description: { type: DataTypes.TEXT, allowNull: true },
+  // description: { type: DataTypes.TEXT, allowNull: true },
   price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-  condition: { type: DataTypes.STRING, allowNull: false },
   quantity: { type: DataTypes.INTEGER, allowNull: false },
   soldQuantity: {
     type: DataTypes.INTEGER,
@@ -58,6 +56,7 @@ const ProductSchema = {
 class Product extends Model {
   static associate(models) {
     this.belongsTo(models.Category, { as: 'category' });
+    this.hasOne(models.ProductMl, { as: 'productMl', foreignKey: 'prodId' });
   }
   static config(sequelize) {
     return {
@@ -68,4 +67,4 @@ class Product extends Model {
     };
   }
 }
-module.exports = { Product, ProductSchema, PRODUCT_TABLE };
+module.exports = { PRODUCT_TABLE, ProductSchema, Product };

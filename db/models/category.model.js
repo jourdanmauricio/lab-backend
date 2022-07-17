@@ -5,16 +5,16 @@ const CATEGORY_TABLE = 'categories';
 const CategorySchema = {
   id: {
     allowNull: false,
-    autoIncrement: true,
+    autoIncrement: false,
     primaryKey: true,
-    type: DataTypes.INTEGER,
-  },
-  mlId: {
     type: DataTypes.STRING(20),
-    unique: true,
-    allowNull: true,
-    field: 'ml_id',
   },
+  // mlId: {
+  //   type: DataTypes.STRING(20),
+  //   unique: true,
+  //   allowNull: true,
+  //   field: 'ml_id',
+  // },
   name: {
     type: DataTypes.STRING(100),
     unique: true,
