@@ -19,6 +19,10 @@ module.exports = {
         onDelete: 'SET NULL',
         field: 'prod_id',
       },
+      sku: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
       quantity: { type: DataTypes.INTEGER, allowNull: false },
       status: {

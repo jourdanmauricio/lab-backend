@@ -46,6 +46,7 @@ class User extends Model {
   static associate(models) {
     this.hasOne(models.Customer, { as: 'customer', foreignKey: 'userId' });
     this.hasOne(models.UserMl, { as: 'userMl', foreignKey: 'userId' });
+    this.hasOne(models.Setting, { as: 'setting', foreignKey: 'userId' });
   }
 
   static config(sequelize) {

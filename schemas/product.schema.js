@@ -4,6 +4,7 @@ const id = Joi.number().integer();
 const mlId = Joi.string();
 const attributes = Joi.array();
 const name = Joi.string().min(3).max(100);
+const sku = Joi.string();
 const price = Joi.number().integer().min(10);
 const price_min = Joi.number().integer();
 const price_max = Joi.number().integer();
@@ -24,6 +25,7 @@ const createProductSchema = Joi.object({
   mlId: mlId.required(),
   attributes: attributes.required(),
   name: name.required(),
+  sku: sku.required(),
   price: price.required(),
   // description: description.required(),
   thumbnail: image.required(),
@@ -38,9 +40,12 @@ const createProductSchema = Joi.object({
 });
 
 const updateProductSchema = Joi.object({
+  id: id,
   name: name,
+  sku: sku,
   price: price,
   image: image,
+  status: status,
   // description: description,
   categoryId,
 });

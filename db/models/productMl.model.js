@@ -13,6 +13,10 @@ const ProductMlSchema = {
     type: DataTypes.INTEGER,
     field: 'prod_id',
   },
+  sku: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
   price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
   quantity: { type: DataTypes.INTEGER, allowNull: false },
   status: {

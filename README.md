@@ -11,6 +11,11 @@ npm run dev
 
 ---
 
+crear migraciones
+npm run migrations:generate create-settings
+
+---
+
 eliminar migraciones
 npm run migrations:clean
 
