@@ -23,14 +23,15 @@ module.exports = {
         allowNull: false,
       },
       status: {
-        type: DataTypes.ENUM(
+        // type: DataTypes.STRING,
+        type: DataTypes.ENUM([
           'pending',
           'under_review',
           'inactive',
           'active',
           'paused',
-          'closed'
-        ),
+          'closed',
+        ]),
         allowNull: false,
       },
       pictures: { type: DataTypes.JSONB, allowNull: false },
@@ -67,5 +68,6 @@ module.exports = {
 
   async down(queryInterface) {
     await queryInterface.dropTable(PRODUCT_TABLE);
+    await queryInterface.dropType('enum_products_status');
   },
 };
