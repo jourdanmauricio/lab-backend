@@ -68,6 +68,6 @@ module.exports = {
 
   async down(queryInterface) {
     await queryInterface.dropTable(PRODUCT_TABLE);
-    await queryInterface.dropType('enum_products_status');
+    await queryInterface.query('DROP TYPE IF EXISTS "enum_products_status";');
   },
 };
