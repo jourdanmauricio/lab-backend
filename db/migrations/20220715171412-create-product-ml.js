@@ -25,7 +25,14 @@ module.exports = {
       price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
       available_quantity: { type: DataTypes.INTEGER, allowNull: false },
       status: {
-        type: DataTypes.ENUM('pending', 'active', 'paused', 'closed'),
+        type: DataTypes.ENUM(
+          'pending',
+          'under_review',
+          'inactive',
+          'active',
+          'paused',
+          'closed'
+        ),
         allowNull: false,
       },
       start_time: {
