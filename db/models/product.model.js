@@ -18,7 +18,14 @@ const ProductSchema = {
     allowNull: false,
   },
   status: {
-    type: DataTypes.ENUM('pending', 'active', 'paused', 'closed'),
+    type: DataTypes.ENUM(
+      'pending',
+      'under_review',
+      'inactive',
+      'active',
+      'paused',
+      'closed'
+    ),
     allowNull: false,
   },
   pictures: { type: DataTypes.JSONB, allowNull: false },
