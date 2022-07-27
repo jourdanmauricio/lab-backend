@@ -6,7 +6,6 @@ $ kill -9 PID
 ---
 
 docker-compose up -d
-
 npm run dev
 
 ---
@@ -68,3 +67,10 @@ psql -h localhost -d lab_store -U labadmin
 # lab-backend
 
 https://polar-wave-19678.herokuapp.com/api/v1/products
+
+---
+
+HEROKU
+heroku run npm run migrations:clean
+heroku run npm run migrations:run
+heroku run sequelize db:seed:all
