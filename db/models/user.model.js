@@ -18,8 +18,7 @@ const UserSchema = {
     allowNull: false,
     type: DataTypes.STRING(100),
   },
-  recoveryToken: {
-    field: 'recovery_token',
+  recovery_token: {
     allowNull: true,
     type: DataTypes.STRING(150),
   },
@@ -28,25 +27,23 @@ const UserSchema = {
     type: DataTypes.STRING(20),
     defaultValue: 'customer',
   },
-  createdAt: {
+  created_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  updatedAt: {
+  updated_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'updated_at',
     defaultValue: Sequelize.NOW,
   },
 };
 
 class User extends Model {
   static associate(models) {
-    this.hasOne(models.Customer, { as: 'customer', foreignKey: 'userId' });
-    this.hasOne(models.UserMl, { as: 'userMl', foreignKey: 'userId' });
-    this.hasOne(models.Setting, { as: 'setting', foreignKey: 'userId' });
+    this.hasOne(models.Customer, { as: 'customer', foreignKey: 'user_id' });
+    this.hasOne(models.UserMl, { as: 'userMl', foreignKey: 'user_id' });
+    this.hasOne(models.Setting, { as: 'setting', foreignKey: 'user_id' });
   }
 
   static config(sequelize) {

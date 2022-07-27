@@ -16,7 +16,7 @@ class CustomerService {
     return user;
   }
   async create(data) {
-    const user = await models.User.findByPk(data.userId, {
+    const user = await models.User.findByPk(data.user_id, {
       include: ['customer'],
     });
     if (user.customer) {
@@ -28,12 +28,12 @@ class CustomerService {
 
   async update(id, changes) {
     const customer = await this.findOne(id);
-    const user = await models.User.findByPk(changes.userId);
-    if (changes.userId !== customer.userId) {
+    const user = await models.User.findByPk(changes.user_id);
+    if (changes.user_id !== customer.user_id) {
       throw boom.badRequest('Perfil incorrecto!');
     }
     const rta = await customer.update(changes);
-    await user.update({ updatedAt: Date.now() });
+    await user.update({ updated_at: Date.now() });
     return rta;
   }
 

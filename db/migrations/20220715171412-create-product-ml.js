@@ -12,39 +12,35 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.STRING(20),
       },
-      prodId: {
+      prod_id: {
         type: DataTypes.INTEGER,
         references: { model: PRODUCT_TABLE, key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        field: 'prod_id',
       },
-      sku: {
+      seller_custom_field: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-      quantity: { type: DataTypes.INTEGER, allowNull: false },
+      available_quantity: { type: DataTypes.INTEGER, allowNull: false },
       status: {
         type: DataTypes.ENUM('pending', 'active', 'paused', 'closed'),
         allowNull: false,
       },
-      startTime: {
+      start_time: {
         allowNull: false,
         type: DataTypes.DATE,
-        field: 'start_time',
         defaultValue: Sequelize.NOW,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE,
-        field: 'created_at',
         defaultValue: Sequelize.NOW,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE,
-        field: 'updated_at',
         defaultValue: Sequelize.NOW,
       },
     });

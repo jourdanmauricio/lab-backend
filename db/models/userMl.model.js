@@ -8,75 +8,65 @@ const UserMlSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  userId: {
+  user_id: {
     allowNull: true,
     type: DataTypes.INTEGER,
-    field: 'user_id',
   },
-  mlUserId: {
+  ml_user_id: {
     allowNull: true,
     type: DataTypes.INTEGER,
-    field: 'ml_user_id',
   },
   nickname: {
     allowNull: true,
     type: DataTypes.STRING(100),
   },
-  accessToken: {
+  access_token: {
     allowNull: true,
     type: DataTypes.STRING(),
-    field: 'access_token',
   },
-  tokenType: {
+  token_type: {
     allowNull: true,
     type: DataTypes.STRING(20),
-    field: 'token_type',
   },
   scope: {
     allowNull: true,
     type: DataTypes.STRING(50),
   },
-  expiresIn: {
+  expires_in: {
     allowNull: true,
     type: DataTypes.INTEGER,
-    field: 'expires_in',
   },
-  refreshToken: {
+  refresh_token: {
     allowNull: true,
     type: DataTypes.STRING(),
-    field: 'refresh_token',
   },
-  endAt: {
+  end_at: {
     allowNull: true,
     type: DataTypes.DATE(),
-    field: 'end_at',
   },
   address: {
     allowNull: true,
     type: DataTypes.JSONB,
   },
-  buyerReputation: {
+  buyer_reputation: {
     allowNull: true,
     type: DataTypes.JSONB,
-    field: 'buyer_reputation',
   },
   company: {
     allowNull: true,
     type: DataTypes.JSONB,
   },
-  countryId: {
+  country_id: {
     allowNull: true,
     type: DataTypes.STRING(10),
-    field: 'country_id',
   },
   email: {
     allowNull: true,
     type: DataTypes.STRING(),
   },
-  firstName: {
+  first_name: {
     allowNull: true,
     type: DataTypes.STRING(),
-    field: 'first_name',
   },
   gender: {
     allowNull: true,
@@ -86,10 +76,9 @@ const UserMlSchema = {
     allowNull: true,
     type: DataTypes.JSONB,
   },
-  lastName: {
+  last_name: {
     allowNull: true,
     type: DataTypes.STRING(),
-    field: 'last_name',
   },
   logo: {
     allowNull: true,
@@ -103,33 +92,32 @@ const UserMlSchema = {
     allowNull: true,
     type: DataTypes.JSONB,
   },
-  sellerReputation: {
+  seller_reputation: {
     allowNull: true,
     type: DataTypes.JSONB,
-    field: 'seller_reputation',
   },
-  siteId: {
+  site_id: {
     allowNull: true,
     type: DataTypes.STRING(3),
-    field: 'site_id',
   },
-  createdAt: {
+  created_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  updatedAt: {
+  updated_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'updated_at',
     defaultValue: Sequelize.NOW,
   },
 };
 
 class UserMl extends Model {
   static associate(models) {
-    this.belongsTo(models.User, { as: 'user' });
+    // this.belongsTo(models.User, { as: 'user' });
+    this.belongsTo(models.User, {
+      foreignKey: 'user_id',
+    });
   }
 
   static config(sequelize) {

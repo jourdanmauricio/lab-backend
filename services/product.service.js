@@ -19,7 +19,7 @@ class ProductsService {
 
   async create(data) {
     const newProduct = await models.Product.create(data);
-    newProduct.mlId = data.mlId;
+    newProduct.ml_id = data.ml_id;
     return newProduct;
   }
 

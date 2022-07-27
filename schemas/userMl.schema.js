@@ -1,63 +1,63 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const userId = Joi.number().integer();
-const mlUserId = Joi.number().integer();
+const user_id = Joi.number().integer();
+const ml_user_id = Joi.number().integer();
 const nickname = Joi.string();
-const accessToken = Joi.string();
+const access_token = Joi.string();
 const scope = Joi.string();
-const tokenType = Joi.string();
-const expiresIn = Joi.number().integer();
-const refreshToken = Joi.string();
-//const endAt = Joi.date();
+const token_type = Joi.string();
+const expires_in = Joi.number().integer();
+const refresh_token = Joi.string();
+//const end_at = Joi.date();
 const address = Joi.object();
-const buyerReputation = Joi.object();
+const buyer_reputation = Joi.object();
 const company = Joi.object();
-const countryId = Joi.string();
+const country_id = Joi.string();
 const email = Joi.string();
-const firstName = Joi.string();
+const first_name = Joi.string();
 const gender = Joi.string();
 const identification = Joi.object();
-const lastName = Joi.string();
+const last_name = Joi.string();
 const logo = Joi.string().allow(null, '');
 const permalink = Joi.string();
 const phone = Joi.object();
-const sellerReputation = Joi.object();
-const siteId = Joi.string();
+const seller_reputation = Joi.object();
+const site_id = Joi.string();
 
 const createUserMlSchema = Joi.object({
-  mlUserId: mlUserId.required(),
-  userId: userId.required(),
+  ml_user_id: ml_user_id.required(),
+  user_id: user_id.required(),
   nickname: nickname.required(),
-  accessToken: accessToken.required(),
-  tokenType: tokenType.required(),
+  access_token: access_token.required(),
+  token_type: token_type.required(),
   scope: scope.required(),
-  expiresIn: expiresIn.required(),
-  refreshToken: refreshToken.required(),
+  expires_in: expires_in.required(),
+  refresh_token: refresh_token.required(),
   address,
-  buyerReputation,
+  buyer_reputation,
   company,
-  countryId,
+  country_id,
   email,
-  firstName,
+  first_name,
   gender,
   id,
   identification,
-  lastName,
+  last_name,
   logo,
   permalink,
   phone,
-  sellerReputation,
-  siteId,
+  seller_reputation,
+  site_id,
 });
 
 const updateUserMlSchema = Joi.object({
-  userId: userId.required(),
-  accessToken: accessToken.required(),
-  tokenType: tokenType.required(),
+  user_id: user_id.required(),
+  access_token: access_token.required(),
+  token_type: token_type.required(),
   scope: scope.required(),
-  expiresIn: expiresIn.required(),
-  refreshToken: refreshToken.required(),
+  expires_in: expires_in.required(),
+  refresh_token: refresh_token.required(),
 });
 
 const getUserMlSchema = Joi.object({

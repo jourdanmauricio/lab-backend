@@ -21,8 +21,7 @@ module.exports = {
         allowNull: false,
         type: DataTypes.STRING(100),
       },
-      recoveryToken: {
-        field: 'recovery_token',
+      recovery_token: {
         allowNull: true,
         type: DataTypes.STRING(150),
       },
@@ -31,16 +30,14 @@ module.exports = {
         type: DataTypes.STRING(20),
         defaultValue: 'customer',
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: true,
-        field: 'created_at',
         defaultValue: Sequelize.NOW,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: true,
         type: DataTypes.DATE,
-        field: 'updated_at',
         defaultValue: Sequelize.NOW,
       },
     });

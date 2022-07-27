@@ -2,14 +2,14 @@ const Joi = require('joi');
 
 const id = Joi.string().min(3).max(20);
 const name = Joi.string().min(3).max(100);
-const fullName = Joi.string();
-const pathFromRoot = Joi.array();
+const full_name = Joi.string();
+const path_from_root = Joi.array();
 const picture = Joi.string().allow(null, '').uri();
 const settings = Joi.object();
 const attributes = Joi.array();
 const attributes_oblg = Joi.object();
-const createdAt = Joi.date();
-const updatedAt = Joi.date();
+const created_at = Joi.date();
+const updated_at = Joi.date();
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
 const q = Joi.string();
@@ -17,14 +17,14 @@ const q = Joi.string();
 const createCategorySchema = Joi.object({
   id: id.required(),
   name: name.required(),
-  fullName: fullName,
-  pathFromRoot: pathFromRoot,
+  full_name: full_name,
+  path_from_root: path_from_root,
   picture: picture,
   settings: settings,
   attributes: attributes,
   attributes_oblg: attributes_oblg,
-  createdAt: createdAt,
-  updatedAt: updatedAt,
+  created_at: created_at,
+  updated_at: updated_at,
 });
 
 const updateCategorySchema = Joi.object({

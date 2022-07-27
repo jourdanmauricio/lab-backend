@@ -10,8 +10,7 @@ const SettingSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  userId: {
-    field: 'user_id',
+  user_id: {
     allowNull: true,
     type: DataTypes.INTEGER,
     unique: true,
@@ -22,48 +21,28 @@ const SettingSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
   },
-  property: {
+  setting: {
     allowNull: false,
-    unique: true,
-    type: DataTypes.STRING(30),
-  },
-  value: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  valueb: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
-  },
-  valuea: {
-    type: DataTypes.ARRAY(Sequelize.JSONB),
-    allowNull: true,
-  },
-  valuej: {
     type: DataTypes.JSONB,
-    allowNull: true,
   },
-  comment: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  createdAt: {
+  created_at: {
     allowNull: true,
     type: DataTypes.DATE,
-    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  updatedAt: {
+  updated_at: {
     allowNull: true,
     type: DataTypes.DATE,
-    field: 'updated_at',
     defaultValue: Sequelize.NOW,
   },
 };
 
 class Setting extends Model {
   static associate(models) {
-    this.belongsTo(models.User, { as: 'user' });
+    // this.belongsTo(models.User, { as: 'user' });
+    this.belongsTo(models.User, {
+      foreignKey: 'user_id',
+    });
   }
 
   static config(sequelize) {

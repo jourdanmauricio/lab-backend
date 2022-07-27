@@ -17,6 +17,7 @@ npm run migrations:generate create-settings
 ---
 
 eliminar migraciones
+npm run migrations:revert
 npm run migrations:clean
 
 ---
@@ -28,6 +29,7 @@ npm run migrations:run
 
 creando seed user-admin
 sequelize seed:generate --name admin-user
+sequelize seed:generate --name admin-setting
 
 ---
 
@@ -48,6 +50,7 @@ sequelize db:seed:undo:all
 
 ejecutar solo un seed
 npx sequelize-cli db:seed --seed 20220708154719-users.js
+npx sequelize-cli db:seed --seed 20220722013422-admin-setting.js
 
 ---
 

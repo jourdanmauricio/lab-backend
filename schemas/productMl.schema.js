@@ -1,21 +1,21 @@
 const Joi = require('joi');
 
 const id = Joi.string();
-const prodId = Joi.number().integer();
-const sku = Joi.string();
+const prod_id = Joi.number().integer();
+const seller_custom_field = Joi.string();
 const price = Joi.number().min(10);
-const quantity = Joi.number().integer();
+const available_quantity = Joi.number().integer();
 const status = Joi.string();
-const startTime = Joi.date();
+const start_time = Joi.date();
 
 const createProductMlSchema = Joi.object({
   id: id.required(),
-  prodId: prodId.required(),
-  sku: sku.required(),
+  prod_id: prod_id.required(),
+  seller_custom_field: seller_custom_field.required(),
   price: price.required(),
-  quantity: quantity.required(),
+  available_quantity: available_quantity.required(),
   status: status.required(),
-  startTime: startTime.required(),
+  start_time: start_time.required(),
 });
 
 // const updateProductSchema = Joi.object({
@@ -23,7 +23,7 @@ const createProductMlSchema = Joi.object({
 //   price: price,
 //   image: image,
 //   description: description,
-//   categoryId,
+//   category_id,
 // });
 
 const getProductSchema = Joi.object({

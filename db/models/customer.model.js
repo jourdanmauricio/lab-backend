@@ -15,27 +15,23 @@ const CustomerSchema = {
     allowNull: false,
     type: DataTypes.STRING(50),
   },
-  lastName: {
+  last_name: {
     allowNull: false,
     type: DataTypes.STRING(50),
-    field: 'last_name',
   },
   phone: {
     allowNull: true,
     type: DataTypes.STRING,
   },
-  documentType: {
+  document_type: {
     allowNull: true,
-    field: 'document_type',
     type: DataTypes.STRING(20),
   },
-  documentNumber: {
+  document_number: {
     allowNull: true,
-    field: 'document_number',
     type: DataTypes.STRING(20),
   },
-  userId: {
-    field: 'user_id',
+  user_id: {
     allowNull: true,
     type: DataTypes.INTEGER,
     unique: true,
@@ -46,23 +42,25 @@ const CustomerSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
   },
-  createdAt: {
+  created_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  updatedAt: {
+  updated_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'updated_at',
     defaultValue: Sequelize.NOW,
   },
 };
 
 class Customer extends Model {
   static associate(models) {
-    this.belongsTo(models.User, { as: 'user' });
+    // this.belongsTo(models.User, { as: 'user' });
+    this.belongsTo(models.User, {
+      foreignKey: 'user_id',
+    });
+
     //this.hasMany(models.Order, {
     //  as: 'orders',
     //  foreignKey: 'customerId',

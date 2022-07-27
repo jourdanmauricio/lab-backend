@@ -5,22 +5,24 @@ class UserMlService {
   constructor() {}
 
   async create(data) {
+    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
     const newUserMl = await models.UserMl.create(data);
+
+    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
     if (!newUserMl) {
       throw boom.notFound('user not found');
     }
-
-    const user = await models.User.findByPk(newUserMl.userId, {
+    const user = await models.User.findByPk(newUserMl.user_id, {
       include: ['customer', 'userMl'],
     });
     return user;
-    // return newUserMl;
+    // return data;
   }
 
-  async findByUserId(userId) {
+  async findByUserId(user_id) {
     const userMl = await models.UserMl.findOne({
       where: {
-        user_id: userId,
+        user_id: user_id,
       },
     });
 
@@ -49,9 +51,9 @@ class UserMlService {
 
   async delete(id) {
     const userMl = await this.findOne(id);
-    const userId = userMl.userId;
+    const user_id = userMl.user_id;
     await userMl.destroy();
-    const user = await models.User.findByPk(userId, {
+    const user = await models.User.findByPk(user_id, {
       include: ['customer', 'userMl'],
     });
     return user;

@@ -9,27 +9,19 @@ const CategorySchema = {
     primaryKey: true,
     type: DataTypes.STRING(20),
   },
-  // mlId: {
-  //   type: DataTypes.STRING(20),
-  //   unique: true,
-  //   allowNull: true,
-  //   field: 'ml_id',
-  // },
   name: {
     type: DataTypes.STRING(100),
     unique: true,
     allowNull: false,
   },
-  fullName: {
+  full_name: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: true,
-    field: 'full_name',
   },
-  pathFromRoot: {
+  path_from_root: {
     type: DataTypes.ARRAY(Sequelize.JSONB),
     allowNull: true,
-    field: 'path_from_root',
   },
   picture: {
     type: DataTypes.STRING,
@@ -47,16 +39,14 @@ const CategorySchema = {
     type: DataTypes.JSONB,
     allowNull: true,
   },
-  createdAt: {
+  created_at: {
     allowNull: true,
     type: DataTypes.DATE,
-    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  updatedAt: {
+  updated_at: {
     allowNull: true,
     type: DataTypes.DATE,
-    field: 'updated_at',
     defaultValue: Sequelize.NOW,
   },
 };
@@ -65,7 +55,7 @@ class Category extends Model {
   static associate(models) {
     this.hasMany(models.Product, {
       as: 'products',
-      foreignKey: 'categoryId',
+      foreignKey: 'category_id',
     });
   }
 

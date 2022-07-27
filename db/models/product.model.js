@@ -9,14 +9,13 @@ const ProductSchema = {
     type: DataTypes.INTEGER,
   },
   attributes: { type: DataTypes.JSONB, allowNull: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  sku: { type: DataTypes.TEXT, allowNull: false },
+  title: { type: DataTypes.STRING, allowNull: false },
+  seller_custom_field: { type: DataTypes.TEXT, allowNull: false },
   price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-  quantity: { type: DataTypes.INTEGER, allowNull: false },
-  soldQuantity: {
+  available_quantity: { type: DataTypes.INTEGER, allowNull: false },
+  sold_quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'sold_quantity',
   },
   status: {
     type: DataTypes.ENUM('pending', 'active', 'paused', 'closed'),
@@ -24,39 +23,41 @@ const ProductSchema = {
   },
   pictures: { type: DataTypes.JSONB, allowNull: false },
   thumbnail: { type: DataTypes.STRING, allowNull: false },
-  saleTerms: { type: DataTypes.JSONB, allowNull: true },
+  condition: { type: DataTypes.STRING, allowNull: false },
+  listing_type_id: { type: DataTypes.STRING, allowNull: false },
+  sale_terms: { type: DataTypes.JSONB, allowNull: true },
   variations: { type: DataTypes.JSONB, allowNull: true },
-  startTime: {
+  start_time: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'start_time',
     defaultValue: Sequelize.NOW,
   },
-  categoryId: {
-    field: 'category_id',
+  category_id: {
     allowNull: false,
     type: DataTypes.INTEGER,
     references: { model: CATEGORY_TABLE, key: 'id' },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
   },
-  createdAt: {
+  created_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  updatedAt: {
+  updated_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'updated_at',
     defaultValue: Sequelize.NOW,
   },
 };
 class Product extends Model {
   static associate(models) {
-    this.belongsTo(models.Category, { as: 'category' });
-    this.hasOne(models.ProductMl, { as: 'prodMl', foreignKey: 'prodId' });
+    this.belongsTo(models.Category, {
+      as: 'category',
+      foreignKey: 'category_id',
+    });
+    this.hasOne(models.ProductMl, { as: 'prodMl', foreignKey: 'prod_id' });
   }
   static config(sequelize) {
     return {

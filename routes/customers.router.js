@@ -44,7 +44,7 @@ router.patch(
     try {
       const { id } = req.params;
       const body = req.body;
-      body.updatedAt = Date.now();
+      body.updated_at = Date.now();
       res.status(201).json(await service.update(id, body));
     } catch (error) {
       next(error);

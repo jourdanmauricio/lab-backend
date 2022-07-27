@@ -35,7 +35,7 @@ function checkUser(property) {
     const user = req.user;
     let id = '';
     if (property === 'body') {
-      id = req.body.userId;
+      id = req.body.user_id;
     } else {
       id = parseInt(req.params.id);
     }

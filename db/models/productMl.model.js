@@ -8,44 +8,44 @@ const ProductMlSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  prodId: {
+  prod_id: {
     allowNull: true,
     type: DataTypes.INTEGER,
-    field: 'prod_id',
   },
-  sku: {
+  seller_custom_field: {
     allowNull: true,
     type: DataTypes.STRING,
   },
   price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-  quantity: { type: DataTypes.INTEGER, allowNull: false },
+  available_quantity: { type: DataTypes.INTEGER, allowNull: false },
   status: {
     type: DataTypes.ENUM('pending', 'active', 'paused', 'closed'),
     allowNull: false,
   },
-  startTime: {
+  start_time: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'start_time',
     defaultValue: Sequelize.NOW,
   },
-  createdAt: {
+  created_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  updatedAt: {
+  updated_at: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'updated_at',
     defaultValue: Sequelize.NOW,
   },
 };
 class ProductMl extends Model {
   static associate(models) {
-    this.belongsTo(models.Product, { as: 'prod' });
+    // this.belongsTo(models.Product, { as: 'prod' });
+    this.belongsTo(models.Product, {
+      foreignKey: 'prod_id',
+    });
   }
+
   static config(sequelize) {
     return {
       sequelize,

@@ -1,24 +1,14 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const userId = Joi.number().integer();
-const property = Joi.string().max(30);
-const value = Joi.string();
-const valueb = Joi.boolean();
-const valuea = Joi.array();
-const valuej = Joi.object();
-const comment = Joi.string();
+const user_id = Joi.number().integer();
+const setting = Joi.object();
 
 const getSettingSchema = Joi.object({ id: id.required() });
 
 const createSettingSchema = Joi.object({
-  userId: userId.required(),
-  property: property.required(),
-  value: value,
-  valueb: valueb,
-  valuea: valuea,
-  valuej: valuej,
-  comment: comment,
+  user_id: user_id.required(),
+  setting: setting,
 });
 
 module.exports = {
