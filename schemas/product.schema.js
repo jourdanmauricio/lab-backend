@@ -57,6 +57,8 @@ const updateProductSchema = Joi.object({
   listing_type_id,
   // description: description,
   category_id,
+  variations,
+  pictures,
 });
 
 const getProductSchema = Joi.object({

@@ -6,7 +6,7 @@ const validatorHandler = require('./../middlewares/validator.handler');
 const {
   // updateProductSchema,
   createProductMlSchema,
-  // getPoductSchema,
+  getProductMlSchema,
   // queryProductMlSchema,
 } = require('./../schemas/productMl.schema');
 
@@ -21,6 +21,23 @@ router.get(
     try {
       const users = await service.find(req.query);
       res.json(users);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.patch(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  validatorHandler(getProductMlSchema, 'params'),
+  validatorHandler(createProductMlSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const newCategory = await service.update(id, body);
+      res.status(200).json(newCategory);
     } catch (error) {
       next(error);
     }

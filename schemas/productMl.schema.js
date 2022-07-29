@@ -26,7 +26,7 @@ const createProductMlSchema = Joi.object({
 //   category_id,
 // });
 
-const getProductSchema = Joi.object({
+const getProductMlSchema = Joi.object({
   id: id.required(),
 });
 
@@ -44,6 +44,6 @@ const getProductSchema = Joi.object({
 module.exports = {
   createProductMlSchema,
   // updateProductSchema,
-  getProductSchema,
+  getProductMlSchema,
   // queryProductSchema,
 };

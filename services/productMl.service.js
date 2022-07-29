@@ -1,17 +1,27 @@
-// const boom = require('@hapi/boom');
+const boom = require('@hapi/boom');
 
 const { models } = require('../libs/sequelize');
-// const { Op } = require('sequelize');
 
 class ProductsMlService {
-  constructor() {
-    this.products = [];
-    // this.generate();
+  constructor() {}
+
+  async findOne(id) {
+    const product = await models.ProductMl.findByPk(id);
+    if (!product) {
+      throw boom.notFound('product not found');
+    }
+    return product;
   }
 
   async create(data) {
     const newProduct = await models.ProductMl.create(data);
     return newProduct;
+  }
+
+  async update(id, changes) {
+    const productMl = await this.findOne(id);
+    const rta = await productMl.update(changes);
+    return rta;
   }
 
   async find() {

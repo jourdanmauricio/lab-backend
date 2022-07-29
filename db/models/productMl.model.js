@@ -6,7 +6,7 @@ const ProductMlSchema = {
     allowNull: false,
     autoIncrement: false,
     primaryKey: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   prod_id: {
     allowNull: true,
