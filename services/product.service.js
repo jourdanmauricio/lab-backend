@@ -17,6 +17,13 @@ class ProductsService {
     return product;
   }
 
+  async findSkus() {
+    const skus = await models.Product.findAll({
+      attributes: ['id', 'seller_custom_field'],
+    });
+    return skus;
+  }
+
   async create(data) {
     const newProduct = await models.Product.create(data);
     newProduct.ml_id = data.ml_id;

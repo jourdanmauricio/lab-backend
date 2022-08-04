@@ -6,6 +6,7 @@ const seller_custom_field = Joi.string();
 const price = Joi.number().min(10);
 const available_quantity = Joi.number().integer();
 const status = Joi.string();
+const permalink = Joi.string();
 const start_time = Joi.date();
 
 const createProductMlSchema = Joi.object({
@@ -15,6 +16,7 @@ const createProductMlSchema = Joi.object({
   price: price.required(),
   available_quantity: available_quantity.required(),
   status: status.required(),
+  permalink: permalink.required(),
   start_time: start_time.required(),
 });
 

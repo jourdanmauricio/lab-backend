@@ -35,6 +35,7 @@ module.exports = {
         ),
         allowNull: false,
       },
+      permalink: { allowNull: false, type: DataTypes.STRING },
       start_time: {
         allowNull: false,
         type: DataTypes.DATE,

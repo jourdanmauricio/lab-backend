@@ -28,6 +28,7 @@ const ProductSchema = {
     ),
     allowNull: false,
   },
+  description: { type: DataTypes.TEXT, allowNull: true },
   pictures: { type: DataTypes.JSONB, allowNull: false },
   thumbnail: { type: DataTypes.STRING, allowNull: false },
   condition: { type: DataTypes.STRING, allowNull: false },

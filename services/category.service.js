@@ -20,7 +20,7 @@ class CategoryService {
       options.where = {
         [Op.or]: [
           {
-            ml_id: {
+            id: {
               [Op.like]: `%${q}%`,
             },
           },

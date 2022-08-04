@@ -8,7 +8,7 @@ const seller_custom_field = Joi.string();
 const price = Joi.number();
 const price_min = Joi.number();
 const price_max = Joi.number();
-// const description = Joi.string().min(10);
+const description = Joi.string().allow(null, '');
 const thumbnail = Joi.string().uri();
 const available_quantity = Joi.number().integer();
 const sold_quantity = Joi.number().integer();
@@ -29,7 +29,7 @@ const createProductSchema = Joi.object({
   title: title.required(),
   seller_custom_field: seller_custom_field.required(),
   price: price.required(),
-  // description: description.required(),
+  description,
   thumbnail: thumbnail.required(),
   listing_type_id: listing_type_id.required(),
   condition: condition.required(),
@@ -55,7 +55,7 @@ const updateProductSchema = Joi.object({
   status,
   sale_terms,
   listing_type_id,
-  // description: description,
+  description,
   category_id,
   variations,
   pictures,

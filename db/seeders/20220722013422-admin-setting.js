@@ -11,6 +11,7 @@ module.exports = {
             status: '',
             listing_type_id: '',
             condition: '',
+            hintSku: false,
           }),
           created_at: new Date(),
           updated_at: new Date(),

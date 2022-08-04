@@ -9,6 +9,7 @@ const {
   getProductSchema,
   queryProductSchema,
 } = require('./../schemas/product.schema');
+const { checkRoles } = require('../middlewares/auth.handler');
 
 const router = express.Router();
 const service = new ProductService();
@@ -20,6 +21,20 @@ router.get(
     try {
       const products = await service.find(req.query);
       res.json(products);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get(
+  '/getSkus',
+  passport.authenticate('jwt', { session: false }),
+  checkRoles('admin', 'superadmin'),
+  async (req, res, next) => {
+    try {
+      const skus = await service.findSkus();
+      res.status(200).json(skus);
     } catch (error) {
       next(error);
     }

@@ -23,7 +23,6 @@ module.exports = {
         allowNull: false,
       },
       status: {
-        // type: DataTypes.STRING,
         type: DataTypes.ENUM([
           'pending',
           'under_review',
@@ -34,6 +33,7 @@ module.exports = {
         ]),
         allowNull: false,
       },
+      description: { type: DataTypes.TEXT, allowNull: true },
       pictures: { type: DataTypes.JSONB, allowNull: false },
       thumbnail: { type: DataTypes.STRING, allowNull: false },
       condition: { type: DataTypes.STRING, allowNull: false },
