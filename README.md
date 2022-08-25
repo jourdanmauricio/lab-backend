@@ -11,7 +11,7 @@ npm run dev
 ---
 
 crear migraciones
-npm run migrations:generate create-settings
+npm run migrations:generate create-product-web
 
 ---
 

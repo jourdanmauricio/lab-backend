@@ -25,7 +25,8 @@ router.post(
       const token = jwt.sign(payload, config.jwtSecret);
 
       // retornamos el user y el token
-      res.status(200).json({ user, token });
+      // res.status(200).json({ user, token });
+      res.status(200).json({ access_token: token });
     } catch (error) {
       next(error);
     }

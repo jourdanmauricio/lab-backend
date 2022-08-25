@@ -5,10 +5,8 @@ class UserMlService {
   constructor() {}
 
   async create(data) {
-    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
     const newUserMl = await models.UserMl.create(data);
 
-    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
     if (!newUserMl) {
       throw boom.notFound('user not found');
     }

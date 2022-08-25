@@ -57,9 +57,8 @@ const CustomerSchema = {
 class Customer extends Model {
   static associate(models) {
     // this.belongsTo(models.User, { as: 'user' });
-    this.belongsTo(models.User, {
-      foreignKey: 'user_id',
-    });
+    this.belongsTo(models.User, { as: 'user', foreignKey: 'id' });
+    //
 
     //this.hasMany(models.Order, {
     //  as: 'orders',
@@ -73,6 +72,9 @@ class Customer extends Model {
       tableName: CUSTOMER_TABLE,
       modelName: 'Customer',
       timestamps: false,
+      defaultScope: {
+        attributes: { exclude: ['created_at', 'updated_at'] },
+      },
     };
   }
 }

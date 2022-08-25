@@ -48,16 +48,16 @@ const ProductSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
   },
-  created_at: {
-    allowNull: false,
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW,
-  },
-  updated_at: {
-    allowNull: false,
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW,
-  },
+  // created_at: {
+  //   allowNull: false,
+  //   type: DataTypes.DATE,
+  //   defaultValue: Sequelize.NOW,
+  // },
+  // updated_at: {
+  //   allowNull: false,
+  //   type: DataTypes.DATE,
+  //   defaultValue: Sequelize.NOW,
+  // },
 };
 class Product extends Model {
   static associate(models) {
@@ -66,13 +66,15 @@ class Product extends Model {
       foreignKey: 'category_id',
     });
     this.hasOne(models.ProductMl, { as: 'prodMl', foreignKey: 'prod_id' });
+    this.hasOne(models.ProductWeb, { as: 'prodWeb', foreignKey: 'prod_id' });
   }
   static config(sequelize) {
     return {
       sequelize,
       tableName: PRODUCT_TABLE,
       modelName: 'Product',
-      timestamps: false,
+      timestamps: true,
+      underscored: true,
     };
   }
 }

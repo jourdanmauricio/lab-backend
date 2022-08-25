@@ -24,6 +24,12 @@ class ProductsMlService {
     return rta;
   }
 
+  async delete(id) {
+    const productMl = await this.findOne(id);
+    await productMl.destroy();
+    return { id };
+  }
+
   async find() {
     const productsMl = await models.ProductMl.findAll();
     return productsMl;

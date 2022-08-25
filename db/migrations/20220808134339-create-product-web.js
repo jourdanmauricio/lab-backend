@@ -1,16 +1,16 @@
 'use strict';
 
 const { DataTypes, Sequelize } = require('sequelize');
-const { PRODUCT_ML_TABLE } = require('./../models/productMl.model');
+const { PRODUCT_WEB_TABLE } = require('./../models/productWeb.model');
 const { PRODUCT_TABLE } = require('./../models/product.model');
 module.exports = {
   async up(queryInterface) {
-    await queryInterface.createTable(PRODUCT_ML_TABLE, {
+    await queryInterface.createTable(PRODUCT_WEB_TABLE, {
       id: {
         allowNull: false,
-        autoIncrement: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
       },
       prod_id: {
         type: DataTypes.INTEGER,
@@ -35,7 +35,7 @@ module.exports = {
         ),
         allowNull: false,
       },
-      permalink: { allowNull: false, type: DataTypes.STRING },
+      permalink: { allowNull: true, type: DataTypes.STRING },
       start_time: {
         allowNull: false,
         type: DataTypes.DATE,
@@ -56,9 +56,9 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable(PRODUCT_ML_TABLE);
+    await queryInterface.dropTable(PRODUCT_WEB_TABLE);
     await queryInterface.sequelize.query(
-      'DROP TYPE IF EXISTS enum_products_ml_status'
+      'DROP TYPE IF EXISTS enum_products_web_status'
     );
   },
 };

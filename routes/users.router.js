@@ -34,6 +34,20 @@ router.get(
 );
 
 router.get(
+  '/profile',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res, next) => {
+    try {
+      const user = req.user;
+      const profile = await service.findOne(user.sub);
+      res.status(200).json(profile);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get(
   '/:id',
   validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {

@@ -58,6 +58,9 @@ class User extends Model {
           user.password = password;
         },
       },
+      defaultScope: {
+        attributes: { exclude: ['created_at', 'updated_at'] },
+      },
     };
   }
 }

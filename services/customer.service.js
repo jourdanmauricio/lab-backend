@@ -8,20 +8,31 @@ class CustomerService {
     const rta = await models.Customer.findAll({ include: ['user'] });
     return rta;
   }
-  async findOne(id) {
+
+  async findOneById(id) {
     const user = await models.Customer.findByPk(id);
     if (!user) {
       throw boom.notFound('customer not found');
     }
     return user;
   }
-  async create(data) {
-    const user = await models.User.findByPk(data.user_id, {
+
+  async findOne(id) {
+    // const user = await models.Customer.findByPk(id);
+    const user = await models.Customer.findOne({ where: { user_id: id } });
+    if (!user) {
+      throw boom.notFound('customer not found');
+    }
+    return user;
+  }
+  async create(id, data) {
+    const user = await models.User.findByPk(id, {
       include: ['customer'],
     });
     if (user.customer) {
       throw boom.conflict('customer exists');
     }
+    data.user_id = id;
     const newCustomer = await models.Customer.create(data);
     return newCustomer;
   }

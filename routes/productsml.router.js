@@ -59,4 +59,19 @@ router.post(
   }
 );
 
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  validatorHandler(getProductMlSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const delProd = await service.delete(id);
+      res.status(200).json(delProd);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 module.exports = router;

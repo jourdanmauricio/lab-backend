@@ -7,7 +7,7 @@ const category_id = Joi.string();
 const condition = Joi.string();
 const description = Joi.string().allow(null, '');
 const listing_type_id = Joi.string();
-const ml_id = Joi.string();
+// const ml_id = Joi.string();
 const pictures = Joi.array();
 const price = Joi.number();
 const price_min = Joi.number();
@@ -20,11 +20,12 @@ const status = Joi.string();
 const thumbnail = Joi.string().uri();
 const title = Joi.string().min(3).max(200);
 const variations = Joi.array();
+const q = Joi.string();
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
 
 const createProductSchema = Joi.object({
-  ml_id: ml_id.required(),
+  // ml_id: ml_id.required(),
   attributes: attributes.required(),
   title: title.required(),
   seller_custom_field: seller_custom_field.required(),
@@ -68,6 +69,7 @@ const getProductSchema = Joi.object({
 const queryProductSchema = Joi.object({
   limit,
   offset,
+  q,
   price,
   price_min,
   price_max: price_max.when('price_min', {

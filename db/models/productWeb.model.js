@@ -1,12 +1,12 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const PRODUCT_ML_TABLE = 'products_ml';
+const PRODUCT_WEB_TABLE = 'products_web';
 
-const ProductMlSchema = {
+const ProductWebSchema = {
   id: {
     allowNull: false,
-    autoIncrement: false,
+    autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
   },
   prod_id: {
     allowNull: true,
@@ -29,25 +29,25 @@ const ProductMlSchema = {
     ),
     allowNull: false,
   },
-  permalink: { allowNull: false, type: DataTypes.STRING },
+  permalink: { allowNull: true, type: DataTypes.STRING },
   start_time: {
     allowNull: false,
     type: DataTypes.DATE,
     defaultValue: Sequelize.NOW,
   },
   variations: { type: DataTypes.JSONB, allowNull: true },
-  // created_at: {
-  //   allowNull: false,
-  //   type: DataTypes.DATE,
-  //   defaultValue: Sequelize.NOW,
-  // },
-  // updated_at: {
-  //   allowNull: false,
-  //   type: DataTypes.DATE,
-  //   defaultValue: Sequelize.NOW,
-  // },
+  created_at: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    defaultValue: Sequelize.NOW,
+  },
+  updated_at: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    defaultValue: Sequelize.NOW,
+  },
 };
-class ProductMl extends Model {
+class ProductWeb extends Model {
   static associate(models) {
     // this.belongsTo(models.Product, { as: 'prod' });
     this.belongsTo(models.Product, {
@@ -58,11 +58,11 @@ class ProductMl extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: PRODUCT_ML_TABLE,
-      modelName: 'ProductMl',
+      tableName: PRODUCT_WEB_TABLE,
+      modelName: 'ProductWeb',
       timestamps: true,
       underscored: true,
     };
   }
 }
-module.exports = { PRODUCT_ML_TABLE, ProductMlSchema, ProductMl };
+module.exports = { PRODUCT_WEB_TABLE, ProductWebSchema, ProductWeb };

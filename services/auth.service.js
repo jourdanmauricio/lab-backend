@@ -44,7 +44,7 @@ class AuthService {
 
     const payload = { sub: user.id };
     const token = jwt.sign(payload, config.jwtSecret, {
-      expires_in: '15min',
+      expiresIn: '15min',
     });
     const link = `${config.frontEnd}/recovery-password?token=${token}`;
     await service.update(user.id, { recovery_token: token });
@@ -61,7 +61,7 @@ class AuthService {
               <tr>
                 <td style="border-radius: 2px;" bgcolor="#ED2939">
                   <a href=${link} target="_blank" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
-                    Recuperar contraseña             
+                    Recuperar contraseña
                   </a>
                 </td>
               </tr>
@@ -69,8 +69,8 @@ class AuthService {
           </td>
         </tr>
       </table>
-      <p>Si el botón no fuciona puedes copiar y pegar el siguiente ingresa a este link 
-      en tu navegador para recuperar tu contraseña:</p> 
+      <p>Si el botón no fuciona puedes copiar y pegar el siguiente ingresa a este link
+      en tu navegador para recuperar tu contraseña:</p>
       <br> ${link} <br><br>
       <p>Muchas gracias,</p>
       <p>TiDev</p>
@@ -98,7 +98,7 @@ class AuthService {
 
   async changePassword(token, newPassword) {
     try {
-      const payload = await jwt.verify(token, config.jwtSecret);
+      const payload = jwt.verify(token, config.jwtSecret);
       const user = await service.findOne(payload.sub);
 
       if (user.recovery_token !== token) {

@@ -10,33 +10,25 @@ const permalink = Joi.string();
 const start_time = Joi.date();
 const variations = Joi.array();
 
-const createProductMlSchema = Joi.object({
-  id: id.required(),
+const createProductWebSchema = Joi.object({
+  id: id,
   prod_id: prod_id.required(),
   seller_custom_field: seller_custom_field.required(),
   price: price.required(),
   available_quantity: available_quantity.required(),
   status: status.required(),
-  permalink: permalink.required(),
+  permalink: permalink,
   start_time: start_time.required(),
   variations,
 });
 
-// const updateProductSchema = Joi.object({
-//   name: name,
-//   price: price,
-//   image: image,
-//   description: description,
-//   category_id,
-// });
-
-const getProductMlSchema = Joi.object({
+const getProductWebSchema = Joi.object({
   id: id.required(),
 });
 
 module.exports = {
-  createProductMlSchema,
+  createProductWebSchema,
   // updateProductSchema,
-  getProductMlSchema,
+  getProductWebSchema,
   // queryProductSchema,
 };

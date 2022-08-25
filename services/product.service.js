@@ -1,7 +1,7 @@
 const boom = require('@hapi/boom');
 
 const { models } = require('../libs/sequelize');
-// const { Op } = require('sequelize');
+const { Op } = require('sequelize');
 
 class ProductsService {
   constructor() {
@@ -32,16 +32,101 @@ class ProductsService {
 
   async find(query) {
     const options = {
-      include: ['prodMl'],
+      include: ['prodMl', 'prodWeb'],
       where: {},
       order: [['updated_at', 'DESC']],
     };
     // const { limit, offset, price, price_min, price_max } = query;
-    const { limit, offset } = query;
+    const { limit, offset, q } = query;
     if (limit && offset) {
       options.limit = limit;
       options.offset = offset;
     }
+
+    let search = JSON.parse(q);
+
+    if (search.status) {
+      options.where = {
+        ...options.where,
+        [Op.and]: [
+          {
+            status: {
+              [Op.eq]: search.status,
+            },
+          },
+        ],
+      };
+    }
+    if (search.condition) {
+      options.where = {
+        ...options.where,
+        [Op.and]: [
+          {
+            condition: {
+              [Op.eq]: search.condition,
+            },
+          },
+        ],
+      };
+    }
+    if (search.category_id) {
+      options.where = {
+        ...options.where,
+        [Op.and]: [
+          {
+            category_id: {
+              [Op.eq]: search.category_id,
+            },
+          },
+        ],
+      };
+    }
+    if (search.ml_id) {
+      options.where = {
+        ...options.where,
+        [Op.and]: [
+          {
+            '$prodMl.id$': {
+              [Op.eq]: search.ml_id,
+            },
+          },
+        ],
+      };
+    }
+
+    if (search.text) {
+      options.where = {
+        ...options.where,
+        [Op.or]: [
+          {
+            description: {
+              [Op.eq]: `%${search.text}%`,
+            },
+          },
+          {
+            title: {
+              [Op.like]: `%${search.text}%`,
+            },
+          },
+          {
+            seller_custom_field: {
+              [Op.like]: `%${search.text}%`,
+            },
+          },
+          // {
+          //   '$customer.name$': {
+          //     [Op.like]: `%${q}%`,
+          //   },
+          // },
+          // {
+          //   '$customer.last_name$': {
+          //     [Op.like]: `%${q}%`,
+          //   },
+          // },
+        ],
+      };
+    }
+
     // if (price) {
     //   options.where.price = price;
     // }

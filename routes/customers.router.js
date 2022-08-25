@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const CustomerService = require('./../services/customer.service');
 const validationHandler = require('../middlewares/validator.handler');
-const { checkUser } = require('../middlewares/auth.handler');
+// const { checkUser } = require('../middlewares/auth.handler');
 
 const {
   createCustomerSchema,
@@ -13,33 +13,42 @@ const {
 const router = express.Router();
 const service = new CustomerService();
 
-router.get('/', async (req, res, next) => {
-  try {
-    res.json(await service.find());
-  } catch (error) {
-    next(error);
-  }
-});
-router.post(
+router.get(
   '/',
-  validationHandler(createCustomerSchema, 'body'),
   passport.authenticate('jwt', { session: false }),
-  checkUser('body'),
   async (req, res, next) => {
     try {
-      const body = req.body;
-      res.status(201).json(await service.create(body));
+      const user = req.user;
+      const customer = await service.findOne(user.sub);
+      res.json(customer);
     } catch (error) {
       next(error);
     }
   }
 );
+
+router.post(
+  '/',
+  validationHandler(createCustomerSchema, 'body'),
+  passport.authenticate('jwt', { session: false }),
+  // checkUser('body'),
+  async (req, res, next) => {
+    try {
+      const user = req.user;
+      const body = req.body;
+      res.status(201).json(await service.create(user.sub, body));
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 router.patch(
   '/:id',
   validationHandler(getCustomerSchema, 'params'),
   validationHandler(updateCustomerSchema, 'body'),
   passport.authenticate('jwt', { session: false }),
-  checkUser('body'),
+  // checkUser('body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -51,6 +60,7 @@ router.patch(
     }
   }
 );
+
 router.delete(
   '/:id',
   validationHandler(getCustomerSchema, 'params'),
@@ -63,4 +73,5 @@ router.delete(
     }
   }
 );
+
 module.exports = router;

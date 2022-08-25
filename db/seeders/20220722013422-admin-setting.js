@@ -12,6 +12,7 @@ module.exports = {
             listing_type_id: '',
             condition: '',
             hintSku: false,
+            pictures: [],
           }),
           created_at: new Date(),
           updated_at: new Date(),
