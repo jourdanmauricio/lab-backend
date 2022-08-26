@@ -41,6 +41,10 @@ module.exports = {
         type: DataTypes.JSONB,
         allowNull: true,
       },
+      description_web: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       created_at: {
         allowNull: true,
         type: DataTypes.DATE,

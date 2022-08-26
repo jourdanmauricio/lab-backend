@@ -39,6 +39,10 @@ const CategorySchema = {
     type: DataTypes.JSONB,
     allowNull: true,
   },
+  description_web: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   created_at: {
     allowNull: true,
     type: DataTypes.DATE,
@@ -65,6 +69,9 @@ class Category extends Model {
       tableName: CATEGORY_TABLE,
       modelName: 'Category',
       timestamps: false,
+      defaultScope: {
+        attributes: { exclude: ['created_at', 'updated_at'] },
+      },
     };
   }
 }

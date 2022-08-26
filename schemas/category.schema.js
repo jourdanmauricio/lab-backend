@@ -8,8 +8,7 @@ const picture = Joi.string().allow(null, '').uri();
 const settings = Joi.object();
 const attributes = Joi.array();
 const attributes_oblg = Joi.object();
-const created_at = Joi.date();
-const updated_at = Joi.date();
+const description_web = Joi.string().allow(null, '');
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
 const q = Joi.string();
@@ -23,8 +22,7 @@ const createCategorySchema = Joi.object({
   settings: settings,
   attributes: attributes,
   attributes_oblg: attributes_oblg,
-  created_at: created_at,
-  updated_at: updated_at,
+  description_web,
 });
 
 const updateCategorySchema = Joi.object({
