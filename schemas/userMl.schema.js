@@ -13,7 +13,7 @@ const site_id = Joi.string();
 
 const createUserMlSchema = Joi.object({
   id: id.required(),
-  user_id: user_id.required(),
+  user_id: user_id,
   nickname: nickname.required(),
   access_token: access_token.required(),
   token_type: token_type.required(),
