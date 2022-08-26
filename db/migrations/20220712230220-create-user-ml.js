@@ -9,7 +9,7 @@ module.exports = {
     await queryInterface.createTable(USER_ML_TABLE, {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: false,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
@@ -23,10 +23,6 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-      },
-      ml_user_id: {
-        allowNull: true,
-        type: DataTypes.INTEGER,
       },
       nickname: {
         allowNull: true,
@@ -52,61 +48,9 @@ module.exports = {
         allowNull: true,
         type: DataTypes.STRING(),
       },
-      end_at: {
-        allowNull: true,
-        type: DataTypes.DATE(),
-      },
-      address: {
-        allowNull: true,
-        type: DataTypes.JSONB,
-      },
-      buyer_reputation: {
-        allowNull: true,
-        type: DataTypes.JSONB,
-      },
-      company: {
-        allowNull: true,
-        type: DataTypes.JSONB,
-      },
-      country_id: {
-        allowNull: true,
-        type: DataTypes.STRING(10),
-      },
-      email: {
-        allowNull: true,
-        type: DataTypes.STRING(),
-      },
-      first_name: {
-        allowNull: true,
-        type: DataTypes.STRING(),
-      },
-      gender: {
-        allowNull: true,
-        type: DataTypes.STRING(1),
-      },
-      identification: {
-        allowNull: true,
-        type: DataTypes.JSONB,
-      },
-      last_name: {
-        allowNull: true,
-        type: DataTypes.STRING(),
-      },
-      logo: {
-        allowNull: true,
-        type: DataTypes.STRING(),
-      },
       permalink: {
         allowNull: true,
         type: DataTypes.STRING(),
-      },
-      phone: {
-        allowNull: true,
-        type: DataTypes.JSONB,
-      },
-      seller_reputation: {
-        allowNull: true,
-        type: DataTypes.JSONB,
       },
       site_id: {
         allowNull: true,

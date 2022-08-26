@@ -2,7 +2,7 @@
 
 const { faker } = require('@faker-js/faker');
 
-const users = [...Array(100)].map(() => ({
+const users = [...Array(10)].map(() => ({
   email: faker.internet.email(),
   password: faker.internet.password(8),
   role: 'customer',
