@@ -27,23 +27,6 @@ router.get(
   }
 );
 
-router.patch(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  validatorHandler(getProductMlSchema, 'params'),
-  validatorHandler(createProductMlSchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const body = req.body;
-      const newCategory = await service.update(id, body);
-      res.status(200).json(newCategory);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
@@ -53,6 +36,23 @@ router.post(
       const body = req.body;
       const newCategory = await service.create(body);
       res.status(201).json(newCategory);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.put(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  validatorHandler(getProductMlSchema, 'params'),
+  validatorHandler(createProductMlSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const productMl = await service.update(id, body);
+      res.status(200).json(productMl);
     } catch (error) {
       next(error);
     }

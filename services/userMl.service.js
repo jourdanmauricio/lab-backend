@@ -38,20 +38,20 @@ class UserMlService {
   async update(id, changes) {
     const userMl = await this.findOne(id);
     await userMl.update(changes);
-    const user = await models.User.findByPk(id, {
-      include: ['customer', 'userMl'],
-    });
-    return user;
+    // const user = await models.User.findByPk(id, {
+    //   include: ['customer', 'userMl'],
+    // });
+    return userMl;
   }
 
   async delete(id) {
     const userMl = await this.findOne(id);
-    const user_id = userMl.user_id;
-    await userMl.destroy();
-    const user = await models.User.findByPk(user_id, {
-      include: ['customer', 'userMl'],
-    });
-    return user;
+    //const user_id = userMl.user_id;
+    return await userMl.destroy();
+    // const user = await models.User.findByPk(user_id, {
+    //   include: ['customer', 'userMl'],
+    // });
+    // return;
   }
 }
 

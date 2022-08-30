@@ -93,7 +93,6 @@ class ProductsService {
         ],
       };
     }
-
     if (search.text) {
       options.where = {
         ...options.where,

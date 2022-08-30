@@ -62,6 +62,9 @@ class ProductMl extends Model {
       modelName: 'ProductMl',
       timestamps: true,
       underscored: true,
+      defaultScope: {
+        attributes: { exclude: ['created_at', 'updated_at'] },
+      },
     };
   }
 }

@@ -25,7 +25,7 @@ const createUserMlSchema = Joi.object({
 });
 
 const updateUserMlSchema = Joi.object({
-  user_id: user_id.required(),
+  user_id: user_id,
   access_token: access_token.required(),
   token_type: token_type.required(),
   scope: scope.required(),

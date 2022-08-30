@@ -17,13 +17,14 @@ const {
 const router = express.Router();
 
 router.get(
-  '/:id',
+  '/',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(getUserMlSchema, 'params'),
+  // validatorHandler(getUserMlSchema, 'params'),
   async (req, res, next) => {
     try {
-      const { id } = req.params;
-      const userMl = await service.findByUserId(id);
+      // const { id } = req.params;
+      const user = req.user;
+      const userMl = await service.findByUserId(user.sub);
       res.json(userMl);
     } catch (error) {
       next(error);
@@ -72,8 +73,8 @@ router.delete(
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const user = await service.delete(id);
-      res.status(200).json(user);
+      await service.delete(id);
+      res.status(200).json({ message: 'User ML deleted' });
     } catch (error) {
       next(error);
     }

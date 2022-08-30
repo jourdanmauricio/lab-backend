@@ -70,13 +70,6 @@ https://polar-wave-19678.herokuapp.com/api/v1/products
 
 ---
 
-HEROKU
-heroku run npm run migrations:clean
-heroku run npm run migrations:run
-heroku run sequelize db:seed:all
-
----
-
 npm run migrations:clean
 npm run migrations:run
 sequelize db:seed:all
